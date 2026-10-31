@@ -877,6 +877,7 @@ footer.page a:hover{border-bottom-color:var(--jade)}
         <p><b>注释</b>：出版社注释挂到对应句，点句上标展开；导读、译文、摘要为本站整理，AI 生成部分已标注。</p>
         <p><b>校对</b>：精读原文逐字回查底本；底本明显讹字未改动原文，引用时按通行文本校正之处已在导读中说明。</p>
         <p><b>引用</b>：司马迁：《史记》，北京：中国文史出版社，2021 年。</p>
+        <p><b>离线单文件</b>：<a href="dist/shiji-standalone.html" download>下载 9.3MB 单文件版</a>（全部内联，可离线；不含分篇页）。</p>
       </div>
       <p class="resume" id="localstats" hidden></p>
     </section>
@@ -1121,7 +1122,7 @@ async function open(id, opts){
       const er = document.createElement("p");
       er.className = "loading";
       er.innerHTML = "本篇加载失败。请刷新重试，或打开分篇页面：" +
-        '<a href="ch/' + it.id + '/">' + it.t + '</a>';
+        '<a href="ch/' + it.id.replace(/^ch/, "") + '/">' + it.t + '</a>';
       inner.appendChild(er);
       addPreface(inner, it); addNext(inner, it);
       return;

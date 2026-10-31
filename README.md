@@ -7,6 +7,7 @@
 - 根页：`index.html`（交互版：人物、事件、时间轴、精读、朗读、笔记）
 - 分篇页：`ch/<编号>-<slug>/`，共 132 个独立 URL，带完整 meta / OG / JSON-LD
 - 分篇索引：`ch/`
+- 离线单文件版：`dist/shiji-standalone.html`（9.3MB，字体/脚本/数据全内联，可离线；已加 noindex，不参与搜索收录）
 - 原文数据：`data/jd/<编号>.json`，打开某篇时按需加载（根页不再内联全量精读）
 - 站点文件：`robots.txt`、`sitemap.xml`、`favicon.svg`、`og-cover.png`、`assets/`
 
