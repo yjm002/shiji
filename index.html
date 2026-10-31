@@ -365,12 +365,64 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
   .anbox{background:#f2f2f2!important;border-left:2px solid #666!important;color:#000!important}
   a{color:#000!important;text-decoration:none!important}
 }
+
+/* ---------- 入门与串读 ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 26px}
+@media(max-width:780px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.steps>div{background:var(--slip);padding:14px 14px 15px;min-width:0}
+.steps b{display:block;font-size:14px;margin-bottom:4px}
+.steps span{display:block;font-size:12px;line-height:1.65;color:var(--ink2)}
+.start{display:grid;gap:34px}
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:780px){.routes{grid-template-columns:minmax(0,1fr)}}
+.route{background:var(--slip);padding:18px 18px 15px;min-width:0}
+.route h3{font-size:16px;margin:0 0 6px;font-weight:600}
+.route .why{font-size:13px;color:var(--ink2);line-height:1.75;margin:0 0 12px}
+.route .seq{display:flex;flex-wrap:wrap;gap:6px}
+.route .seq a{font-family:var(--sans);font-size:11.5px;color:var(--jade);text-decoration:none;border:1px solid var(--line);padding:4px 8px;border-radius:2px;background:var(--paper)}
+.route .seq a:hover{border-color:var(--jade)}
+.route .done{font-family:var(--sans);font-size:10.5px;letter-spacing:.08em;color:var(--muted);margin:10px 0 0}
+.events{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:12px}
+@media(max-width:780px){.events{grid-template-columns:minmax(0,1fr)}}
+.evt{background:var(--slip);padding:18px;min-width:0}
+.evt h3{font-size:16px;margin:0 0 4px}
+.evt .one{font-size:13px;color:var(--ink2);line-height:1.7;margin:0 0 10px}
+.evt .links{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.evt .links a{font-family:var(--sans);font-size:11.5px;color:var(--jade);text-decoration:none;background:var(--jade-soft);padding:3px 7px;border-radius:2px}
+.evt .note{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+.who{background:var(--slip);border:1px solid var(--line);padding:16px 18px}
+.who h3{font-size:16px;margin:0 0 6px}
+.who .sub{font-size:13px;color:var(--ink2);line-height:1.7;margin:0 0 10px}
+.who input{width:100%;font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:2px;outline:none}
+.who input:focus{border-color:var(--jade)}
+.who .hits{margin-top:6px}
+.who .who-row{display:block;padding:10px 0 6px;border-top:1px solid var(--line2);text-decoration:none;color:inherit}
+.who .who-row:hover b{color:var(--jade)}
+.who .who-row b{font-size:14px;color:var(--ink)}
+.who .snip{display:block;font-size:12px;color:var(--muted);line-height:1.7;margin-top:3px}
+.who .cnt{font-family:var(--sans);font-size:10.5px;color:var(--muted);margin-left:8px}
+.who .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.who .chips a{font-family:var(--sans);font-size:11px;color:var(--jade);text-decoration:none;border:1px solid var(--line);padding:3px 7px;border-radius:2px}
+.who .chips a:hover{border-color:var(--jade)}
+.who .empty{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+.chref{color:var(--jade);text-decoration:none;border-bottom:1px dotted var(--jade);cursor:pointer}
+.preface{background:var(--jade-soft);border-left:2px solid var(--jade);padding:14px 16px;margin:0 0 22px}
+.preface .pf-t{font-size:15.5px;line-height:1.85;margin:0 0 7px;color:var(--ink)}
+.preface .pf-how{font-family:var(--sans);font-size:10.5px;letter-spacing:.03em;color:var(--muted);margin:0 0 9px;line-height:1.7}
+.preface details{margin:0}
+.preface summary{cursor:pointer;font-family:var(--sans);font-size:12px;color:var(--jade);letter-spacing:.03em}
+.preface .pf-body{margin-top:12px;font-size:14.5px;line-height:1.85}
+.preface .pf-body h2{display:none}
+.preface .pf-body h3{font-size:14px;margin:16px 0 6px;padding-left:8px;border-left:2px solid var(--jade)}
+.preface .pf-body p{font-size:14px;margin:0 0 8px}
+.preface .pf-body li{font-size:13.5px;margin:0 0 4px}
 </style>
 
 <div class="shell">
   <aside class="spine">
     <p class="mark">史 記</p>
     <nav aria-label="页面导航">
+      <a href="#start">从这里开始</a>
       <a href="#read">读法</a>
       <a href="#view">史观</a>
       <a href="#rules">规律</a>
@@ -400,6 +452,32 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
       </div>
       <div class="vtitle" aria-hidden="true">史记</div>
     </header>
+
+    <section id="start">
+      <p class="eyebrow">从这里开始</p>
+      <h2>先选一条线<small>第一次读，别从第一篇硬啃。挑一条 3–5 篇的短线，先把人物和时间接上；读完一条，再散着读。</small></h2>
+      <div class="steps">
+        <div><b>1 · 30 秒</b><span>先看这一篇讲谁、结局如何。</span></div>
+        <div><b>2 · 导读</b><span>看史事脉络，记住主线，先不记细节。</span></div>
+        <div><b>3 · 原文</b><span>对着译文读；遇到支线，先跳过。</span></div>
+        <div><b>4 · 串读</b><span>点关联篇目，看同一件事的另一面。</span></div>
+      </div>
+      <div class="start">
+        <div class="routes" id="routes"></div>
+        <div>
+          <h3 style="font-size:16px;margin:0 0 6px">同一件事，几篇都在讲</h3>
+          <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin:0">先读“主叙”，再点“别叙”。同一件事在不同篇里的写法不同，这正是《史记》的读法。</p>
+          <div class="events" id="events"></div>
+        </div>
+        <div class="who">
+          <h3>查一个人名、地名、官职</h3>
+          <p class="sub">遇到不认识的人，先看他出现在哪几篇；看他在别的篇里做了什么，比背名词解释有用。</p>
+          <input id="whoq" type="search" placeholder="输入：韩信、长平、廷尉…" autocomplete="off" aria-label="查人名地名官职">
+          <div class="hits" id="whohits"></div>
+          <p class="empty" id="whoempty" hidden>没有找到。换个更短的词试试。</p>
+        </div>
+      </div>
+    </section>
 
     <section id="read">
       <p class="eyebrow">读法</p>
@@ -755,9 +833,11 @@ function open(id, opts){
     const extra = document.createElement("div");
     extra.className = "guide-extra"; extra.innerHTML = it.h;
     const dup = extra.querySelector("h2"); if (dup) dup.remove();
+    linkifyChRefs(extra);
     inner.appendChild(extra);
   }
-  else inner.innerHTML = it.h;
+  else { inner.innerHTML = it.h; linkifyChRefs(inner); }
+  addPreface(inner, it);
   if (it.g === "表序" && it.n !== 132){
     const tip = document.createElement("p");
     tip.className = "tbltip";
@@ -773,7 +853,7 @@ function open(id, opts){
   $("#next").disabled = cur >= items.length - 1;
   if (!readSet.has(it.n)){
     readSet.add(it.n); store.set("shiji.read", [...readSet]);
-    updateProgress();
+    updateProgress(); refreshRouteProgress();
     const slip = document.querySelector(`.slip[data-id="${it.id}"]`);
     if (slip) slip.dataset.read = "1";
   }
@@ -1338,6 +1418,145 @@ function routeFromHash(){
 }
 window.addEventListener("hashchange", routeFromHash);
 setTimeout(routeFromHash, 0);
+
+
+/* ---------- 从这里开始：路线 / 事件 / 查人 / 站内摘要 ---------- */
+const ROUTES = [
+  {t:"先读三个好故事", why:"先不碰本纪。挑人物清楚、冲突集中的列传，读完就有成就感。", chs:[60,64,69]},
+  {t:"楚汉这条主线", why:"秦亡→起义→楚汉→功臣。按时间读，人物会自己接上。", chs:[7,31,8,9,75]},
+  {t:"制度怎么变", why:"从商鞅到主父偃：同一件“怎么治国”，被不同的人做了一遍。", chs:[51,6,70,36,95]},
+  {t:"司马迁自己", why:"先读他为什么写、怎么写，再回头看任何一篇都更容易懂。", chs:[1,113,122]}
+];
+const EVENTS = [
+  {t:"鸿门宴", one:"一场饭局决定了谁先入关、谁称霸王。", main:8, also:[9,38,78],
+   note:"同一顿饭：项羽本纪写项羽的失误，高祖本纪写刘邦的退让，留侯世家写张良的操盘，樊郦滕灌写樊哙闯帐。"},
+  {t:"巨鹿之战", one:"项羽破釜沉舟，秦军主力崩溃。", main:8, also:[7,31],
+   note:"先看秦末为什么到处起火（ch007、ch031），再看项羽怎样一战成名。"},
+  {t:"长平之战", one:"赵括代廉颇，四十余万赵卒被坑。", main:56, also:[64,26],
+   note:"白起王翦列传写战果，廉颇蔺相如列传写换将的决策，赵世家写赵国元气大伤。"},
+  {t:"沙丘之变", one:"始皇死于巡游途中，赵高、李斯改诏立胡亥。", main:7, also:[70,71],
+   note:"秦始皇本纪写事件，李斯列传写他怎么被拖下水，蒙恬列传写扶苏与蒙氏之死。"},
+  {t:"七国之乱", one:"晁错削藩，吴楚七国反，三个月被周亚夫平定。", main:12, also:[89,84,40],
+   note:"景帝本纪写朝廷视角，吴王濞列传写叛乱方，袁盎晁错列传写削藩与杀晁错，绛侯周勃世家写周亚夫用兵。"},
+  {t:"楚汉相争", one:"从鸿沟到垓下，刘邦两次夺军、韩信最后合围。", main:8, also:[9,75,36,38],
+   note:"项羽本纪与高祖本纪是两条对照线；韩信、萧何、张良三篇补上刘邦为什么能赢。"},
+  {t:"三家分晋", one:"晋国被赵、魏、韩三家瓜分，战国开场。", main:22, also:[26,27,28],
+   note:"晋世家写卿族如何坐大，赵、魏、韩三世家接上各自立国的起点。"},
+  {t:"吴越争霸", one:"夫差败越、勾践尝胆、伍子胥被赐死。", main:24, also:[49,14],
+   note:"越王句践世家写勾践，伍子胥列传写吴国内部，吴太伯世家写吴国世系。"}
+];
+function shortTitle(n){
+  const it = items.find(x => x.n === n);
+  return it ? it.t.replace(/（附：.*?）/,"").replace(/第[一二三四五六七八九十百]+$/,"") : "ch" + n;
+}
+function chAnchor(n, label){
+  const a = document.createElement("a");
+  a.href = "#ch-" + n;
+  a.dataset.open = "ch" + String(n).padStart(3,"0");
+  a.textContent = label || ("ch" + String(n).padStart(3,"0") + " " + shortTitle(n));
+  return a;
+}
+function routeProgress(chs){ return chs.filter(n => readSet.has(n)).length; }
+function refreshRouteProgress(){
+  document.querySelectorAll(".route").forEach((card, i) => {
+    const r = ROUTES[i]; if (!r) return;
+    const el = card.querySelector(".done");
+    if (el) el.textContent = "已读 " + routeProgress(r.chs) + " / " + r.chs.length + " 篇";
+  });
+}
+function renderStart(){
+  const routesEl = document.getElementById("routes");
+  if (routesEl){
+    ROUTES.forEach(r => {
+      const card = document.createElement("div"); card.className = "route";
+      const h = document.createElement("h3"); h.textContent = r.t;
+      const p = document.createElement("p"); p.className = "why"; p.textContent = r.why;
+      const seq = document.createElement("div"); seq.className = "seq";
+      r.chs.forEach(n => seq.appendChild(chAnchor(n, "ch" + String(n).padStart(3,"0") + " " + shortTitle(n))));
+      const done = document.createElement("p"); done.className = "done";
+      done.textContent = "已读 " + routeProgress(r.chs) + " / " + r.chs.length + " 篇";
+      card.append(h, p, seq, done); routesEl.appendChild(card);
+    });
+  }
+  const evEl = document.getElementById("events");
+  if (evEl){
+    EVENTS.forEach(ev => {
+      const card = document.createElement("div"); card.className = "evt";
+      const h = document.createElement("h3"); h.textContent = ev.t;
+      const p = document.createElement("p"); p.className = "one"; p.textContent = ev.one;
+      const links = document.createElement("div"); links.className = "links";
+      links.appendChild(chAnchor(ev.main, "主叙 · " + shortTitle(ev.main)));
+      ev.also.forEach(n => links.appendChild(chAnchor(n, "别叙 · " + shortTitle(n))));
+      const nt = document.createElement("p"); nt.className = "note"; nt.textContent = ev.note;
+      card.append(h, p, links, nt); evEl.appendChild(card);
+    });
+  }
+  const input = document.getElementById("whoq"), hits = document.getElementById("whohits"), empty = document.getElementById("whoempty");
+  if (input){
+    let timer = null;
+    const draw = () => {
+      const q = input.value.trim().toLowerCase();
+      hits.innerHTML = ""; empty.hidden = true;
+      if (!q) return;
+      const scored = searchIndex().map(x => ({x, n: x.lo.split(q).length - 1})).filter(o => o.n > 0);
+      scored.sort((a,b) => (b.n - a.n) || (a.x.it.n - b.x.it.n));
+      const found = scored.slice(0, 10);
+      if (!found.length){ empty.hidden = false; return; }
+      found.forEach(({x}) => { const it = x.it;
+        const row = document.createElement("a");
+        row.className = "who-row"; row.href = "#ch-" + it.n;
+        row.dataset.open = "ch" + String(it.n).padStart(3,"0");
+        const b = document.createElement("b");
+        b.textContent = "ch" + String(it.n).padStart(3,"0") + " " + shortTitle(it.n);
+        const sn = document.createElement("span"); sn.className = "snip";
+        sn.textContent = findHit(it.n, q) || it.t;
+        row.append(b, sn); hits.appendChild(row);
+      });
+    };
+    input.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(draw, 120); });
+  }
+}
+function linkifyChRefs(root){
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    const p = node.parentElement;
+    if (!p || p.closest("a,button,script,style")) return;
+    const text = node.nodeValue;
+    if (!/ch\d{1,3}/.test(text)) return;
+    const frag = document.createDocumentFragment();
+    let last = 0, m; const re = /ch(\d{1,3})/g;
+    while ((m = re.exec(text))){
+      if (m.index > last) frag.append(text.slice(last, m.index));
+      const n = Number(m[1]);
+      const a = document.createElement("a");
+      a.className = "chref"; a.href = "#ch-" + n;
+      a.dataset.open = "ch" + String(n).padStart(3,"0"); a.textContent = m[0];
+      frag.append(a); last = m.index + m[0].length;
+    }
+    if (last < text.length) frag.append(text.slice(last));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+function addPreface(inner, it){
+  const sd = STUDY()[it.n];
+  if (!sd || !sd.tldr) return;
+  const pf = document.createElement("div"); pf.className = "preface";
+  const t = document.createElement("p"); t.className = "pf-t"; t.textContent = sd.tldr;
+  const how = document.createElement("p"); how.className = "pf-how";
+  how.textContent = "读法：先看这段摘要，再展开导读看人物与事件脉络，最后读原文。摘要为 AI 生成，史实以原文为准。";
+  pf.append(t, how);
+  const de = document.createElement("details"); de.className = "pf-digest";
+  const su = document.createElement("summary"); su.textContent = "展开导读：史事脉络、关键判断、名句、关联篇目";
+  const body = document.createElement("div"); body.className = "pf-body";
+  body.innerHTML = it.h;
+  const dup = body.querySelector("h2"); if (dup) dup.remove();
+  linkifyChRefs(body);
+  de.append(su, body); pf.append(de);
+  const h2 = inner.querySelector("h2");
+  if (h2) h2.after(pf); else inner.prepend(pf);
+}
+renderStart();
 
 /* ---------- 首屏 ---------- */
 render();
