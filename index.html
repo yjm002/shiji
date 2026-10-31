@@ -647,6 +647,14 @@ footer.page a:hover{border-bottom-color:var(--jade)}
   .modal.wide{width:100vw;max-width:100vw;height:100vh;max-height:100vh;border-radius:0}
   .tbl2 th,.tbl2 td{max-width:180px;padding:5px 7px}
 }
+
+/* ===== 三家注 ===== */
+.show-zhu .unit .zhublock{display:block}
+.zhublock{display:none;margin:8px 0 2px;padding:8px 12px;border-left:2px solid var(--seal);background:var(--slip)}
+.zitem{margin:0 0 6px;font-size:13px;line-height:1.85;color:var(--ink2)}
+.zitem:last-child{margin-bottom:0}
+.zitem b{display:inline-block;font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--seal);border:1px solid currentColor;border-radius:3px;padding:0 4px;margin-right:7px;vertical-align:1px;white-space:nowrap}
+@media (max-width:720px){ .zitem{font-size:12.5px} }
 </style>
 
 <div class="shell">
@@ -3227,6 +3235,103 @@ closeModal = function(){
 };
 
 renderTablesWithData();
+
+
+/* ===== 三家注（四库本：集解 / 索隐 / 正义，按句挂靠） ===== */
+
+const ZHU = {}, ZHU_LOADING = {};
+let zhuOn = !!store.get("shiji.zhu", false);
+
+function loadZhu(n){
+  const k = String(n);
+  if (ZHU[k]) return Promise.resolve(ZHU[k]);
+  if (!ZHU_LOADING[k]){
+    ZHU_LOADING[k] = fetch("data/zhu/" + String(n).padStart(3, "0") + ".json")
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(d => { ZHU[k] = d; delete ZHU_LOADING[k]; return d; })
+      .catch(() => { delete ZHU_LOADING[k]; return null; });
+  }
+  return ZHU_LOADING[k];
+}
+
+function paintZhu(wrap, n){
+  const data = ZHU[String(n)];
+  wrap.querySelectorAll(".zhublock").forEach(el => el.remove());
+  if (!data || !data.u) return 0;
+  let count = 0;
+  wrap.querySelectorAll(".unit").forEach(row => {
+    const list = data.u[row.dataset.ui];
+    if (!list || !list.length) return;
+    const box = document.createElement("div");
+    box.className = "zhublock";
+    list.forEach(([src, txt]) => {
+      const p = document.createElement("p");
+      p.className = "zitem";
+      const b = document.createElement("b");
+      b.textContent = src;
+      const s = document.createElement("span");
+      s.textContent = txt;
+      p.append(b, s);
+      box.appendChild(p);
+      count++;
+    });
+    row.appendChild(box);
+  });
+  return count;
+}
+
+async function setupZhu(){
+  const inner = document.getElementById("dinner");
+  const wrap = inner && inner.querySelector("#jingdu");
+  if (!wrap) return;
+  const dno = document.getElementById("dno");
+  const m = dno && /ch(\d{1,3})/.exec(dno.textContent);
+  const n = m ? Number(m[1]) : 0;
+  const ctl = wrap.querySelector(".jdctl");
+  if (!ctl || !n) return;
+
+  if (!ZHU[String(n)]){
+    const probe = await loadZhu(n);
+    if (!probe || !probe.u || !Object.keys(probe.u).length) return;
+    // 抽屉可能已经换篇
+    const now = /ch(\d{1,3})/.exec(document.getElementById("dno").textContent);
+    if (!now || Number(now[1]) !== n) return;
+  }
+  const data = ZHU[String(n)];
+  if (!data || !data.u) return;
+
+  const total = Object.values(data.u).reduce((a, b) => a + b.length, 0);
+  const bySrc = {};
+  Object.values(data.u).forEach(list => list.forEach(([s]) => { bySrc[s] = (bySrc[s] || 0) + 1; }));
+  const parts = Object.entries(bySrc).map(([s, c]) => s + " " + c).join(" · ");
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "tog zhubtn";
+  btn.textContent = "三家注 " + total;
+  btn.title = "本篇共 " + total + " 条：" + parts + "。四库本转录，与中华书局点校本有异文，引用前核对。";
+  btn.setAttribute("aria-pressed", String(zhuOn));
+
+  const apply = on => {
+    wrap.classList.toggle("show-zhu", on);
+    btn.setAttribute("aria-pressed", String(on));
+    if (on) paintZhu(wrap, n);
+  };
+  btn.addEventListener("click", () => {
+    zhuOn = !zhuOn;
+    store.set("shiji.zhu", zhuOn);
+    apply(zhuOn);
+  });
+  ctl.appendChild(btn);
+  if (zhuOn) apply(true);
+}
+
+/* 每次开篇后挂上按钮 */
+const _afterOpenZhu = afterOpen;
+afterOpen = function(){
+  _afterOpenZhu();
+  try { setupZhu(); } catch (e) {}
+};
 
 </script>
 
