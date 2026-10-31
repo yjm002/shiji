@@ -367,6 +367,14 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
 }
 
 /* ---------- 入门与串读 ---------- */
+.quicklinks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 22px}
+@media(max-width:780px){.quicklinks{grid-template-columns:minmax(0,1fr)}}
+.quicklinks a{background:var(--slip);padding:13px 15px;text-decoration:none;color:var(--ink);min-width:0}
+.quicklinks a:hover{background:var(--jade-soft)}
+.quicklinks b{display:block;font-size:14.5px;margin-bottom:3px}
+.quicklinks span{display:block;font-family:var(--sans);font-size:11.5px;color:var(--muted);line-height:1.5}
+.who-more{margin:10px 0 0;font-family:var(--sans);font-size:12px}
+.who-more a{color:var(--jade);text-decoration:none;border-bottom:1px solid var(--jade)}
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 26px}
 @media(max-width:780px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .steps>div{background:var(--slip);padding:14px 14px 15px;min-width:0}
@@ -518,13 +526,13 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
     <p class="mark">史 記</p>
     <nav aria-label="页面导航">
       <a href="#start">从这里开始</a>
+      <a href="#people">人物</a>
       <a href="#read">读法</a>
       <a href="#view">史观</a>
       <a href="#rules">规律</a>
       <a href="#craft">用人 · 技法</a>
       <a href="#chapters">篇章 132</a>
       <a href="#topics">主题</a>
-      <a href="#people">人物</a>
       <a href="#timeline">时间轴</a>
       <a href="#quick">速查</a>
       <a href="#terms">术语</a>
@@ -553,6 +561,11 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
     <section id="start">
       <p class="eyebrow">从这里开始</p>
       <h2>先选一条线<small>第一次读，别从第一篇硬啃。挑一条 3–5 篇的短线，先把人物和时间接上；读完一条，再散着读。</small></h2>
+      <div class="quicklinks">
+        <a href="#people"><b>人物卡 · 55 位</b><span>他是谁、和谁有关系、在哪几篇</span></a>
+        <a href="#timeline"><b>时间轴 · 33 个节点</b><span>先定位，再读篇</span></a>
+        <a href="#quick"><b>速查 · 决策规则</b><span>When X, do Y</span></a>
+      </div>
       <p class="resume" id="resume" hidden></p>
       <div class="steps">
         <div><b>1 · 30 秒</b><span>先看这一篇讲谁、结局如何。</span></div>
@@ -573,8 +586,17 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
           <input id="whoq" type="search" placeholder="输入：韩信、长平、廷尉…" autocomplete="off" aria-label="查人名地名官职">
           <div class="hits" id="whohits"></div>
           <p class="empty" id="whoempty" hidden>没有找到。换个更短的词试试。</p>
+          <p class="who-more"><a href="#people">看全部 55 位人物卡 →</a></p>
         </div>
       </div>
+    </section>
+
+    <section id="people">
+      <p class="eyebrow">人物</p>
+      <h2>先认人，再读事<small>点一个人，看他是谁、和谁有关系、在哪几篇出场。人名不是用来背的，是用来认路的。</small></h2>
+      <div class="ptool"><input id="pq" type="search" placeholder="搜：项羽、韩信、李广…" autocomplete="off" aria-label="搜人物"></div>
+      <div class="pgrid" id="pgrid"></div>
+      <button class="dmore" id="pmore" type="button">显示全部 55 位</button>
     </section>
 
     <section id="read">
@@ -672,13 +694,6 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
       <div class="topics" id="topics"></div>
     </section>
 
-
-    <section id="people">
-      <p class="eyebrow">人物</p>
-      <h2>先认人，再读事<small>点一个人，看他是谁、和谁有关系、在哪几篇出场。人名不是用来背的，是用来认路的。</small></h2>
-      <div class="ptool"><input id="pq" type="search" placeholder="搜：项羽、韩信、李广…" autocomplete="off" aria-label="搜人物"></div>
-      <div class="pgrid" id="pgrid"></div>
-    </section>
 
     <section id="timeline">
       <p class="eyebrow">时间轴</p>
@@ -1888,14 +1903,22 @@ function yearLabel(y){ return y < 0 ? "前" + (-y) : String(y); }
 function renderPeople(){
   const grid = document.getElementById("pgrid");
   if (!grid) return;
+  const pmore = document.getElementById("pmore");
+  let limit = 12;
   const draw = (q) => {
     grid.innerHTML = "";
     const list = PEOPLE.filter(p => !q || (p.name + p.alias + p.id).includes(q));
     if (!list.length){
       const e = document.createElement("p"); e.className = "empty";
-      e.textContent = "没有找到。换个更短的词。"; grid.appendChild(e); return;
+      e.textContent = "没有找到。换个更短的词。"; grid.appendChild(e);
+      if (pmore) pmore.hidden = true;
+      return;
     }
-    list.forEach(p => {
+    if (pmore){
+      pmore.hidden = list.length <= limit;
+      pmore.textContent = "显示全部 " + list.length + " 位";
+    }
+    list.slice(0, limit).forEach(p => {
       const b = document.createElement("button"); b.type = "button"; b.className = "pcard";
       const n = document.createElement("b"); n.textContent = p.name;
       const al = document.createElement("span"); al.textContent = p.alias;
@@ -1907,7 +1930,8 @@ function renderPeople(){
   };
   draw("");
   const input = document.getElementById("pq");
-  if (input) input.addEventListener("input", () => draw(input.value.trim()));
+  if (input) input.addEventListener("input", () => { limit = 12; draw(input.value.trim()); });
+  if (pmore) pmore.addEventListener("click", () => { limit = 9999; draw(input ? input.value.trim() : ""); });
 }
 function renderTimeline(){
   const wrap = document.getElementById("tl"), filters = document.getElementById("tfilters");
