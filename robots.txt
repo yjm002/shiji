@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /data/
+Disallow: /dist/
 
 Sitemap: https://yjm002.github.io/shiji/sitemap.xml
