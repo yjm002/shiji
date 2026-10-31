@@ -464,6 +464,33 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
 #jingdu.mode-story .unit .v{font-size:16.5px;line-height:1.95}
 #jingdu.mode-text .unit .n,#jingdu.mode-text .unit button.an,#jingdu.mode-text .unit .anbox{display:none}
 
+
+/* ---------- P2：关系图 / 朗读 / 笔记 / 分享卡 / 官制地理 ---------- */
+.pgraph{margin:0 0 18px;max-width:440px}
+.pgraph svg{width:100%;height:auto;display:block}
+.speakrow{display:flex;gap:8px;margin:10px 0 0}
+.speakbtn{font-family:var(--sans);font-size:11px;padding:5px 9px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);cursor:pointer;border-radius:2px}
+.speakbtn[aria-pressed="true"]{border-color:var(--jade);color:var(--jade)}
+.note-mode .unit{cursor:text;box-shadow:inset 2px 0 0 var(--line)}
+.unit.hl{background:linear-gradient(90deg,var(--jade-soft),transparent 72%)}
+.notemark{border:0;background:none;cursor:pointer;font-size:12px;padding:0 4px;vertical-align:super}
+.noteed{margin:8px 0 4px;padding:10px;border:1px solid var(--line);background:var(--paper);display:flex;flex-direction:column;gap:6px}
+.noteed textarea{width:100%;min-height:64px;font:inherit;font-size:13px;padding:8px;border:1px solid var(--line);background:var(--slip);color:var(--ink);resize:vertical}
+.noteed .nbtns{display:flex;gap:6px}
+.noteed button{font-family:var(--sans);font-size:11px;padding:4px 8px;border:1px solid var(--line);background:var(--slip);color:var(--ink2);cursor:pointer}
+.noteed button:hover{border-color:var(--jade);color:var(--jade)}
+.qshare{font-family:var(--sans);font-size:10px;color:var(--muted);border:1px solid var(--line);background:var(--paper);padding:3px 6px;margin-top:6px;cursor:pointer;border-radius:2px}
+.qshare:hover{color:var(--jade);border-color:var(--jade)}
+.pshare{margin-top:12px}
+.dict{margin-top:14px;border-top:1px solid var(--line)}
+.drow{padding:10px 0;border-bottom:1px solid var(--line2)}
+.drow b{font-size:14px}
+.drow .dd{display:block;font-size:12.5px;color:var(--ink2);line-height:1.7;margin:3px 0 6px}
+.drow .dc{display:flex;flex-wrap:wrap;gap:5px}
+.drow .dc a{font-family:var(--sans);font-size:10.5px;color:var(--jade);text-decoration:none;border:1px solid var(--line);padding:2px 6px;border-radius:2px}
+.dmore{font-family:var(--sans);font-size:11.5px;color:var(--jade);background:none;border:1px solid var(--line);padding:6px 10px;margin-top:12px;cursor:pointer}
+.dmore[hidden]{display:none}
+
 .chref{color:var(--jade);text-decoration:none;border-bottom:1px dotted var(--jade);cursor:pointer}
 .resume{font-family:var(--sans);font-size:12.5px;color:var(--ink2);margin:0 0 16px}
 .resume a{color:var(--jade);text-decoration:none;border-bottom:1px solid var(--jade)}
@@ -707,6 +734,12 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
       <h2>术语与典故<small>按拼音排序。</small></h2>
       <div class="toolbar"><div class="search"><label class="sr-only" for="tq">搜索术语</label><input id="tq" type="search" placeholder="搜：推恩、刀笔吏、窃钩者诛…" autocomplete="off"></div></div>
       <div class="terms" id="terms"></div>
+      <h3 style="margin-top:40px">官制 · 地理<small style="display:block;font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--muted);margin-top:6px">从出版社注释与通行官制通释整理，约 150 条；“通释”为编者补注；点篇名直接读。</small></h3>
+      <div class="toolbar"><div class="search"><label class="sr-only" for="dq">搜索官制地理</label><input id="dq" type="search" placeholder="搜：廷尉、河东、郡守…" autocomplete="off"></div></div>
+      <div class="tfilters" id="dfilters"></div>
+      <div class="dict" id="dict"></div>
+      <button class="dmore" id="dmore" type="button">显示更多</button>
+
     </section>
 
     
@@ -906,6 +939,7 @@ function open(id, opts){
     if (m){ const hit = items.find(x => x.n === Number(m[1])); if (hit) id = hit.id; }
   }
   const it = byId[id]; if (!it) return;
+  try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch(e){}
   if (!drawer.classList.contains("on")){ savedY = window.scrollY; lastTrigger = document.activeElement; }
   cur = items.findIndex(x => x.id === id);
   const inner = $("#dinner");
@@ -1162,6 +1196,7 @@ function jdNode(n){
     a.addEventListener("click", e => { e.preventDefault(); art.scrollIntoView({behavior:"smooth", block:"start"}); });
     nav.appendChild(a);
   });
+  initNotes(wrap, ctl, n);
   wrap.addEventListener("click", e => {
     const tl = e.target.closest("a.term-inline");
     if (tl){
@@ -1285,6 +1320,7 @@ function renderJingdu(host, n){
 }
 
 function close(){
+  try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch(e){}
   drawer.classList.remove("on");
   drawer.setAttribute("aria-hidden","true");
   document.documentElement.classList.remove("reading");
@@ -1418,7 +1454,7 @@ const QUOTES = [
 ];
 const quotesEl = $("#quotes");
 QUOTES.forEach(([q, id]) => {
-  const it = byId[id];
+  const it = items.find(x => "ch" + String(x.n).padStart(3,"0") === id);
   const d = document.createElement("div");
   d.className = "quote";
   d.innerHTML = `<a href="#chapters" data-open="${id}"></a>`;
@@ -1429,6 +1465,13 @@ QUOTES.forEach(([q, id]) => {
     s.textContent = `ch${String(it.n).padStart(3,"0")} · ${it.t}`;
     d.appendChild(s);
   }
+  const sb = document.createElement("button");
+  sb.type = "button"; sb.className = "qshare"; sb.textContent = "分享卡";
+  sb.addEventListener("click", () => shareCard({
+    title: "“" + q + "”", subtitle: it ? it.t : id, lines: [],
+    footer: "史记总览 · yjm002.github.io/shiji"
+  }));
+  d.appendChild(sb);
   quotesEl.appendChild(d);
 });
 
@@ -1702,6 +1745,12 @@ function addPreface(inner, it){
     modes.appendChild(b);
   });
   pf.append(t, before, how, modes);
+  if ("speechSynthesis" in window){
+    const sr = document.createElement("div"); sr.className = "speakrow";
+    const sp = document.createElement("button"); sp.type = "button"; sp.className = "speakbtn"; sp.textContent = "朗读本篇";
+    sp.addEventListener("click", () => speakChapter(it, sp));
+    sr.appendChild(sp); pf.appendChild(sr);
+  }
   const de = document.createElement("details"); de.className = "pf-digest";
   const su = document.createElement("summary"); su.textContent = "展开导读：史事脉络、关键判断、名句、关联篇目";
   const body = document.createElement("div"); body.className = "pf-body";
@@ -1902,6 +1951,7 @@ function openPerson(name){
   const al = document.createElement("p"); al.className = "palias"; al.textContent = p.alias;
   const id = document.createElement("p"); id.className = "pid"; id.textContent = p.id;
   box.append(h, al, id);
+  const g = personGraph(p); if (g) box.appendChild(g);
   if (p.rel && p.rel.length){
     const h3 = document.createElement("h3"); h3.textContent = "关系";
     const chips = document.createElement("div"); chips.className = "pchips";
@@ -1940,6 +1990,15 @@ function openPerson(name){
       }
     }
   }
+  const sh = document.createElement("button");
+  sh.type = "button"; sh.className = "pvbtn pshare"; sh.textContent = "生成分享卡";
+  sh.addEventListener("click", () => shareCard({
+    title: p.name,
+    subtitle: p.alias,
+    lines: [p.id].concat((p.rel || []).slice(0, 4).map(([w, t]) => w + "（" + t + "）")),
+    footer: "史记总览 · yjm002.github.io/shiji/#p-" + encodeURIComponent(p.name)
+  }));
+  box.appendChild(sh);
   openModal(box);
   try { history.replaceState(null, "", "#p-" + encodeURIComponent(p.name)); } catch(e){}
 }
@@ -2045,7 +2104,283 @@ function buildBefore(it){
   return box;
 }
 
-renderStart(); renderPeople(); renderTimeline();
+
+/* ---------- P2 功能 ---------- */
+function personGraph(p){
+  const rel = (p.rel || []).slice(0, 8);
+  if (!rel.length) return null;
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 420 300");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", p.name + "的人物关系图");
+  const cx = 210, cy = 150, rx = 140, ry = 98;
+  rel.forEach(([who, type], i) => {
+    const a = (-90 + i * 360 / rel.length) * Math.PI / 180;
+    const x = cx + rx * Math.cos(a), y = cy + ry * Math.sin(a);
+    const line = document.createElementNS(NS, "line");
+    line.setAttribute("x1", cx); line.setAttribute("y1", cy);
+    line.setAttribute("x2", x); line.setAttribute("y2", y);
+    line.style.stroke = "var(--line)"; line.style.strokeWidth = "1.2";
+    svg.appendChild(line);
+    const lab = document.createElementNS(NS, "text");
+    lab.setAttribute("x", (cx + x) / 2); lab.setAttribute("y", (cy + y) / 2 - 3);
+    lab.setAttribute("text-anchor", "middle"); lab.style.fontSize = "10px";
+    lab.style.fill = "var(--muted)"; lab.textContent = type;
+    svg.appendChild(lab);
+    const g = document.createElementNS(NS, "g");
+    if (PMAP[who]){ g.style.cursor = "pointer"; g.addEventListener("click", () => openPerson(who)); }
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", "27");
+    c.style.fill = "var(--slip)"; c.style.stroke = "var(--jade)";
+    c.style.strokeWidth = PMAP[who] ? "1.6" : "0.8";
+    if (!PMAP[who]) c.setAttribute("stroke-dasharray", "3 3");
+    g.appendChild(c);
+    const t = document.createElementNS(NS, "text");
+    t.setAttribute("x", x); t.setAttribute("y", y + 4);
+    t.setAttribute("text-anchor", "middle");
+    t.style.fontSize = who.length > 2 ? "11px" : "13px";
+    t.style.fill = "var(--ink)"; t.textContent = who;
+    g.appendChild(t); svg.appendChild(g);
+  });
+  const cc = document.createElementNS(NS, "circle");
+  cc.setAttribute("cx", cx); cc.setAttribute("cy", cy); cc.setAttribute("r", "34");
+  cc.style.fill = "var(--jade)"; svg.appendChild(cc);
+  const ct = document.createElementNS(NS, "text");
+  ct.setAttribute("x", cx); ct.setAttribute("y", cy + 5);
+  ct.setAttribute("text-anchor", "middle");
+  ct.style.fontSize = "15px"; ct.style.fontWeight = "600";
+  ct.style.fill = "var(--paper)"; ct.textContent = p.name;
+  svg.appendChild(ct);
+  const box = document.createElement("div"); box.className = "pgraph"; box.appendChild(svg);
+  return box;
+}
+function speakChapter(it, btn){
+  if (!("speechSynthesis" in window)) return;
+  const synth = window.speechSynthesis;
+  if (btn.getAttribute("aria-pressed") === "true"){
+    synth.cancel(); btn.setAttribute("aria-pressed", "false"); btn.textContent = "朗读本篇"; return;
+  }
+  synth.cancel();
+  const sd = STUDY()[it.n];
+  let text = (sd && sd.tldr ? sd.tldr + " " : "") + it.t + "。";
+  try {
+    const doc = new DOMParser().parseFromString(it.h, "text/html");
+    const hs = [...doc.querySelectorAll("h3")];
+    const core = hs.find(h => h.textContent.trim() === "核心");
+    if (core){
+      let el = core.nextElementSibling;
+      while (el && el.tagName !== "H3"){ text += " " + (el.textContent || ""); el = el.nextElementSibling; }
+    }
+  } catch(e){}
+  text = text.replace(/\s+/g, " ").slice(0, 1200);
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "zh-CN"; u.rate = 0.95;
+  const vs = synth.getVoices() || [];
+  const zh = vs.find(v => /zh|Chinese/i.test(v.lang + " " + v.name));
+  if (zh) u.voice = zh;
+  u.onend = () => { btn.setAttribute("aria-pressed", "false"); btn.textContent = "朗读本篇"; };
+  u.onerror = u.onend;
+  synth.speak(u);
+  btn.setAttribute("aria-pressed", "true"); btn.textContent = "停止朗读";
+}
+function initNotes(wrap, ctl, n){
+  const key = "shiji.notes." + n;
+  const data = store.get(key, {}) || {};
+  const saveData = () => store.set(key, data);
+  const update = () => {
+    const c = Object.keys(data).length;
+    noteBtn.textContent = c ? "划线笔记 · " + c : "划线笔记";
+  };
+  const mark = (row, ui) => {
+    if (row.querySelector(".notemark")) return;
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "notemark"; b.title = "查看/编辑笔记"; b.textContent = "📝";
+    b.addEventListener("click", e => { e.stopPropagation(); openNote(row, ui); });
+    row.appendChild(b);
+  };
+  const openNote = (row, ui) => {
+    const old = row.querySelector(".noteed");
+    if (old){ old.querySelector("textarea").focus(); return; }
+    const ed = document.createElement("div"); ed.className = "noteed";
+    const ta = document.createElement("textarea");
+    ta.placeholder = "写一句你的理解、疑问或联想…";
+    ta.value = (data[ui] && data[ui].note) || "";
+    const bar = document.createElement("div"); bar.className = "nbtns";
+    const sv = document.createElement("button"); sv.type = "button"; sv.textContent = "保存";
+    sv.addEventListener("click", () => {
+      const txt = ta.value.trim();
+      data[ui] = { hl: true, note: txt }; saveData();
+      row.classList.add("hl");
+      if (txt) mark(row, ui);
+      ed.remove(); update();
+    });
+    const del = document.createElement("button"); del.type = "button"; del.textContent = "删除";
+    del.addEventListener("click", () => {
+      delete data[ui]; saveData();
+      row.classList.remove("hl");
+      const m = row.querySelector(".notemark"); if (m) m.remove();
+      ed.remove(); update();
+    });
+    const cl = document.createElement("button"); cl.type = "button"; cl.textContent = "关闭";
+    cl.addEventListener("click", () => ed.remove());
+    bar.append(sv, del, cl); ed.append(ta, bar); row.appendChild(ed); ta.focus();
+  };
+  const noteBtn = document.createElement("button");
+  noteBtn.type = "button"; noteBtn.className = "tog"; noteBtn.textContent = "划线笔记";
+  let on = store.get("shiji.noteon", false);
+  const sync = () => {
+    noteBtn.setAttribute("aria-pressed", String(on));
+    wrap.classList.toggle("note-mode", on);
+  };
+  noteBtn.addEventListener("click", () => {
+    on = !on; store.set("shiji.noteon", on); sync();
+  });
+  ctl.appendChild(noteBtn);
+  sync();
+  wrap.querySelectorAll(".unit").forEach(row => {
+    const ui = row.dataset.ui, rec = data[ui];
+    if (!rec) return;
+    if (rec.hl) row.classList.add("hl");
+    if (rec.note) mark(row, ui);
+  });
+  update();
+  wrap.addEventListener("click", e => {
+    if (!on) return;
+    if (e.target.closest("button,a,textarea,.noteed")) return;
+    const row = e.target.closest(".unit"); if (!row) return;
+    openNote(row, row.dataset.ui);
+  });
+}
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight){
+  const chars = [...text];
+  let line = "", lines = [];
+  for (const ch of chars){
+    if (ctx.measureText(line + ch).width > maxWidth){ lines.push(line); line = ch; }
+    else line += ch;
+  }
+  if (line) lines.push(line);
+  lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineHeight));
+  return y + lines.length * lineHeight;
+}
+function shareCard(o){
+  const c = document.createElement("canvas");
+  c.width = 1080; c.height = 1440;
+  const x = c.getContext("2d");
+  x.textBaseline = "top";
+  x.fillStyle = "#f5f6f2"; x.fillRect(0, 0, 1080, 1440);
+  x.strokeStyle = "#2b5a4c"; x.lineWidth = 4; x.strokeRect(56, 56, 968, 1328);
+  x.fillStyle = "#2b5a4c"; x.font = "600 26px Georgia, serif"; x.fillText("史 記", 110, 132);
+  x.fillStyle = "#9d3d2e"; x.font = "500 22px sans-serif";
+  x.fillText(o.subtitle || "", 110, 184);
+  x.fillStyle = "#171c18"; x.font = "700 76px 'Noto Serif SC','Songti SC',serif";
+  let y = wrapCanvasText(x, o.title, 110, 300, 860, 96);
+  x.fillStyle = "#4a544d"; x.font = "400 30px 'Noto Serif SC',serif";
+  (o.lines || []).forEach(l => { y = wrapCanvasText(x, l, 110, y + 38, 860, 44); });
+  x.fillStyle = "#7d877f"; x.font = "400 22px sans-serif";
+  x.fillText(o.footer || "史记总览 · yjm002.github.io/shiji", 110, 1318);
+  x.fillText("逐句对照 · 人物关系 · 事件串读", 110, 1360);
+  const a = document.createElement("a");
+  a.download = "史记-" + String(o.title).slice(0, 14).replace(/[\\/:*?"<>|\s]/g, "") + ".png";
+  a.href = c.toDataURL("image/png");
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function renderDict(){
+  const wrap = document.getElementById("dict"), input = document.getElementById("dq");
+  const more = document.getElementById("dmore"), filters = document.getElementById("dfilters");
+  if (!wrap) return;
+  const v = VARS(), m = new Map();
+  for (const n in (v.ch || {})){
+    for (const [w, d] of v.ch[n]){
+      if (!m.has(w)) m.set(w, { w, d, chs: new Set() });
+      m.get(w).chs.add(Number(n));
+    }
+  }
+  for (const w in (v.wi || {})){
+    if (!m.has(w)) continue;
+    for (const n of v.wi[w]) m.get(w).chs.add(Number(n));
+  }
+  const pat = /^(官名|武官名|官职名|郡名|县名|地名|邑名|国名|山名|水名|泽名|关名|亭名|城名|古国名|部族名|民族名|地区名|州名|古地名|古邑名|古县名)/;
+  const all = [...m.values()].filter(x => x.w.length >= 2 && x.w.length <= 6 && pat.test(x.d));
+  const OFFICES = [
+    ["廷尉","九卿之一，掌刑狱，为全国最高司法长官。"],
+    ["郡守","一郡的长官，掌民政、财政、司法与兵事。汉景帝时改称太守。"],
+    ["太守","郡守的改称，一郡最高长官。"],
+    ["县令","一县的长官，万户以上称令，以下称长。"],
+    ["亭长","亭的长官，掌治安、邮驿与过往官员接待。刘邦曾任泗水亭长。"],
+    ["三老","掌教化的乡官。"],
+    ["啬夫","乡官，掌赋税、诉讼等。"],
+    ["游徼","乡官，掌巡察盗贼。"],
+    ["博士","掌通古今、备顾问，秦汉设博士官。"],
+    ["太史令","掌天文历法、祭祀与记事，司马迁父子任此职。"],
+    ["太仆","九卿之一，掌皇帝车马与国家马政。"],
+    ["少府","九卿之一，掌山海池泽之税与皇室手工业。"],
+    ["卫尉","九卿之一，掌宫门警卫。"],
+    ["典客","九卿之一，掌外交与少数民族事务。"],
+    ["治粟内史","九卿之一，掌国家财政。汉景帝时改称大农令，武帝时称大司农。"],
+    ["中车府令","掌皇帝车马与符玺，赵高曾任此职。"],
+    ["郎中令","九卿之一，掌宫殿掖门户，统领郎官。"],
+    ["内史","掌京畿地区，后为京兆尹等。"],
+    ["郡尉","一郡的军事长官，佐郡守掌兵。"],
+    ["县尉","一县的军事与治安长官。"],
+    ["关都尉","掌关隘稽查。"],
+    ["司马","掌军政、军赋，军中高级属官。"],
+    ["司徒","古官名，掌教化。"],
+    ["司空","古官名，掌工程。"],
+    ["司寇","古官名，掌刑狱。"],
+    ["令尹","楚国的最高官职，相当于相国。"],
+    ["相国","丞相的尊称，百官之长。"],
+    ["舍人","门客或属官。"],
+    ["校尉","武官，位次于将军。"],
+    ["都尉","武官，掌军事。"],
+    ["大良造","秦爵第十六级，商鞅曾任。"],
+    ["左庶长","秦爵第十级。"],
+    ["将军","武官，掌征伐。"]
+  ];
+  const idx = searchIndex();
+  OFFICES.forEach(([w, d]) => {
+    const chs = new Set(idx.filter(x => x.lo.includes(w)).map(x => x.it.n));
+    all.push({ w, d: "通释：" + d, chs });
+  });
+  const cat = x => /^(官名|武官名|官职名|通释：)/.test(x.d) ? "官制" : "地理";
+  let cur = "全部", q = "", limit = 60;
+  const draw = () => {
+    wrap.innerHTML = "";
+    const list = all.filter(x => (cur === "全部" || cat(x) === cur) && (!q || x.w.includes(q) || x.d.includes(q)))
+      .sort((a, b) => a.w.length - b.w.length || a.w.localeCompare(b.w));
+    list.slice(0, limit).forEach(x => {
+      const row = document.createElement("div"); row.className = "drow";
+      const b = document.createElement("b"); b.textContent = x.w;
+      const dd = document.createElement("span"); dd.className = "dd"; dd.textContent = x.d;
+      const dc = document.createElement("div"); dc.className = "dc";
+      [...x.chs].sort((a, b) => a - b).slice(0, 6).forEach(n => dc.appendChild(chAnchor(n)));
+      row.append(b, dd, dc); wrap.appendChild(row);
+    });
+    if (!list.length){
+      const e = document.createElement("p"); e.className = "empty";
+      e.textContent = "没有找到。换个更短的词。"; wrap.appendChild(e);
+    }
+    if (more){
+      more.hidden = list.length <= limit;
+      more.textContent = "显示更多（还有 " + Math.max(0, list.length - limit) + " 条）";
+    }
+  };
+  ["全部", "官制", "地理"].forEach(name => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "chip";
+    b.textContent = name; b.setAttribute("aria-pressed", String(name === cur));
+    b.addEventListener("click", () => {
+      cur = name;
+      [...filters.children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
+      limit = 60; draw();
+    });
+    filters.appendChild(b);
+  });
+  if (input) input.addEventListener("input", () => { q = input.value.trim(); limit = 60; draw(); });
+  if (more) more.addEventListener("click", () => { limit += 60; draw(); });
+  draw();
+}
+
+renderStart(); renderPeople(); renderTimeline(); renderDict();
 
 /* ---------- 弹层 ---------- */
 const _mbg = document.getElementById("mbg");
