@@ -406,6 +406,13 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
 .who .chips a:hover{border-color:var(--jade)}
 .who .empty{font-size:12.5px;color:var(--muted);margin:8px 0 0}
 .chref{color:var(--jade);text-decoration:none;border-bottom:1px dotted var(--jade);cursor:pointer}
+.nextbox{margin:34px 0 8px;padding:16px 18px;border:1px solid var(--line);background:var(--slip)}
+.nextbox h3{font-size:14px;margin:0 0 4px}
+.nextbox .nx{font-size:12px;color:var(--muted);margin:0 0 10px;line-height:1.7}
+.nextbox .nrow{display:flex;flex-wrap:wrap;gap:8px}
+.nextbox a{display:inline-flex;flex-direction:column;gap:2px;font-family:var(--sans);font-size:11.5px;color:var(--jade);text-decoration:none;border:1px solid var(--line);padding:6px 9px;border-radius:2px;background:var(--paper);max-width:100%}
+.nextbox a b{font-weight:600;color:var(--ink);font-size:12.5px}
+.nextbox a span{font-size:10.5px;color:var(--muted)}
 .preface{background:var(--jade-soft);border-left:2px solid var(--jade);padding:14px 16px;margin:0 0 22px}
 .preface .pf-t{font-size:15.5px;line-height:1.85;margin:0 0 7px;color:var(--ink)}
 .preface .pf-how{font-family:var(--sans);font-size:10.5px;letter-spacing:.03em;color:var(--muted);margin:0 0 9px;line-height:1.7}
@@ -837,7 +844,7 @@ function open(id, opts){
     inner.appendChild(extra);
   }
   else { inner.innerHTML = it.h; linkifyChRefs(inner); }
-  addPreface(inner, it);
+  addPreface(inner, it); addNext(inner, it);
   if (it.g === "表序" && it.n !== 132){
     const tip = document.createElement("p");
     tip.className = "tbltip";
@@ -1538,6 +1545,37 @@ function linkifyChRefs(root){
     node.parentNode.replaceChild(frag, node);
   });
 }
+
+function addNext(inner, it){
+  const seen = new Set(); const out = [];
+  const push = (n, why) => {
+    if (n === it.n || seen.has(n)) return;
+    const ch = items.find(x => x.n === n); if (!ch) return;
+    seen.add(n); out.push([n, why]);
+  };
+  ROUTES.forEach(r => {
+    const i = r.chs.indexOf(it.n);
+    if (i >= 0 && i < r.chs.length - 1) push(r.chs[i + 1], "按「" + r.t + "」继续");
+  });
+  EVENTS.forEach(ev => {
+    if (ev.main === it.n) ev.also.forEach(n => push(n, "「" + ev.t + "」的另一篇写法"));
+    else if (ev.also.includes(it.n)) push(ev.main, "回到「" + ev.t + "」主叙");
+  });
+  if (!out.length) return;
+  const box = document.createElement("div"); box.className = "nextbox";
+  const h = document.createElement("h3"); h.textContent = "接下来读什么";
+  const p = document.createElement("p"); p.className = "nx";
+  p.textContent = "顺着一条线读，比随机翻篇更容易记住人。下面这几篇与当前这篇直接相连。";
+  const row = document.createElement("div"); row.className = "nrow";
+  out.slice(0, 3).forEach(([n, why]) => {
+    const a = chAnchor(n);
+    const b = document.createElement("b"); b.textContent = "ch" + String(n).padStart(3,"0") + " " + shortTitle(n);
+    const sp = document.createElement("span"); sp.textContent = why;
+    a.textContent = ""; a.append(b, sp); row.appendChild(a);
+  });
+  box.append(h, p, row); inner.appendChild(box);
+}
+
 function addPreface(inner, it){
   const sd = STUDY()[it.n];
   if (!sd || !sd.tldr) return;
