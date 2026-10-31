@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yjm002.github.io/shiji/sitemap.xml
