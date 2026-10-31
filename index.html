@@ -2013,7 +2013,14 @@ function buildBefore(it){
     const b = document.createElement("b"); b.textContent = "背景";
     p.append(b, bg); box.appendChild(p);
   }
-  const body = doc.body.textContent || "";
+  let body = "";
+  const keep = ["核心", "史事脉络", "生平脉络"];
+  hs.forEach(h => {
+    if (!keep.includes(h.textContent.trim())) return;
+    let el = h.nextElementSibling;
+    while (el && el.tagName !== "H3"){ body += " " + el.textContent; el = el.nextElementSibling; }
+  });
+  if (!body) body = doc.body.textContent || "";
   const ppl = PEOPLE.filter(p => body.includes(p.name)).slice(0, 3);
   const p2 = document.createElement("p");
   const b2 = document.createElement("b"); b2.textContent = "先认人"; p2.appendChild(b2);
