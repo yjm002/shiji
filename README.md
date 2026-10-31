@@ -7,7 +7,7 @@
 - 根页：`index.html`（交互版：人物、事件、时间轴、精读、朗读、笔记）
 - 分篇页：`ch/<编号>-<slug>/`，共 132 个独立 URL，带完整 meta / OG / JSON-LD
 - 分篇索引：`ch/`
-- 离线单文件版：`dist/shiji-standalone.html`（9.3MB，字体/脚本/数据全内联，可离线；已加 noindex，不参与搜索收录）
+- 离线单文件版：`dist/shiji-standalone.html`（9.6MB，字体/脚本/数据全内联，可离线；已加 noindex，不参与搜索收录）
 - 原文数据：`data/jd/<编号>.json`，打开某篇时按需加载（根页不再内联全量精读）
 - 站点文件：`robots.txt`、`sitemap.xml`、`favicon.svg`、`og-cover.png`、`assets/`
 
@@ -45,6 +45,6 @@ GitHub Pages 从 `main` 分支根目录发布。`.nojekyll` 用于跳过 Jekyll�
 
 ## 内容边界
 
-- 130 篇，另收《报任安书》；十表只收表序，表格未收。
+- 130 篇，另收《报任安书》；十表 8 张已收表文（四库本转录），2 张仅表序。
 - 原文逐字回查底本；导读、译文、摘要为本站整理，AI 生成部分已标注。
 - 部分篇目含后人补作，篇首已注明。
