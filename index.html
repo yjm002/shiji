@@ -2380,7 +2380,7 @@ function renderDict(){
   draw();
 }
 
-renderStart(); renderPeople(); renderTimeline(); renderDict();
+renderStart(); renderPeople(); renderTimeline();
 
 /* ---------- 弹层 ---------- */
 const _mbg = document.getElementById("mbg");
@@ -2399,6 +2399,7 @@ if (_mbg){
 render();
 const idle = window.requestIdleCallback || (fn => setTimeout(fn, 1500));
 idle(() => { try { JD[2]; } catch(e){} });
+idle(() => { try { renderDict(); } catch(e){} });
 </script>
 
 <div class="modal-bg" id="mbg" hidden>
