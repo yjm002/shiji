@@ -27,6 +27,8 @@ window.SHIJI_ANALYTICS = {
 启用后，根页和全部分篇页会一起生效；`chapter` 事件记录打开的是哪一篇。
 不填则只有 `localStorage` 里的本机统计：访问次数、已读篇数、笔记条数，显示在「底本 → 本机统计」。
 
+远程统计需要一个免费账号（Plausible / Umami / GA4），把 ID 填进 `assets/analytics.js` 即可；没有账号无法代开。另：GitHub 仓库 Insights → Traffic 可看 14 天访客与克隆，不需要配置。
+
 ## 更新内容
 
 源文件在仓库外的 `../shiji-overview.html`。改完内容后：
