@@ -2407,7 +2407,8 @@ if (_mbg){
 render();
 const idle = window.requestIdleCallback || (fn => setTimeout(fn, 1500));
 idle(() => { try { JD[2]; } catch(e){} });
-idle(() => { try { renderDict(); } catch(e){} });
+if (window.requestIdleCallback) window.requestIdleCallback(() => { try { renderDict(); } catch(e){} }, {timeout: 2500});
+else setTimeout(() => { try { renderDict(); } catch(e){} }, 1200);
 </script>
 
 <div class="modal-bg" id="mbg" hidden>
