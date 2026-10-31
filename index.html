@@ -1482,6 +1482,13 @@ function scrollToGuide(k){
   if (el) el.scrollIntoView({block:"start"});
 }
 function routeFromHash(){
+  if (location.hash.startsWith("#p-")){
+    try {
+      const name = decodeURIComponent(location.hash.slice(3));
+      if (PMAP[name]) openPerson(name);
+    } catch(e){}
+    return;
+  }
   const m = /^#ch-(\d+)(?:-an-(\d+))?(?:-g(\d+))?$/.exec(location.hash);
   if (m){
     const num = Number(m[1]);
@@ -1509,7 +1516,9 @@ function routeFromHash(){
   }
 }
 window.addEventListener("hashchange", routeFromHash);
+window.addEventListener("load", routeFromHash);
 setTimeout(routeFromHash, 0);
+setTimeout(routeFromHash, 350);
 
 
 /* ---------- 从这里开始：路线 / 事件 / 查人 / 站内摘要 ---------- */
@@ -1884,6 +1893,7 @@ function closeModal(){
   bg.hidden = true;
   const body = document.getElementById("mbody"); if (body) body.replaceChildren();
   document.documentElement.classList.remove("modal-open");
+  try { if (location.hash.startsWith("#p-")) history.replaceState(null, "", "#people"); } catch(e){}
 }
 function openPerson(name){
   const p = PMAP[name]; if (!p) return;
@@ -1931,6 +1941,7 @@ function openPerson(name){
     }
   }
   openModal(box);
+  try { history.replaceState(null, "", "#p-" + encodeURIComponent(p.name)); } catch(e){}
 }
 function sliceUnits(n, from, to){
   const c = JD[n]; if (!c) return [];
