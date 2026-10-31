@@ -1498,6 +1498,7 @@ function renderStart(){
       links.appendChild(chAnchor(ev.main, "主叙 · " + shortTitle(ev.main)));
       ev.also.forEach(n => links.appendChild(chAnchor(n, "别叙 · " + shortTitle(n))));
       const nt = document.createElement("p"); nt.className = "note"; nt.textContent = ev.note;
+      linkifyChRefs(nt);
       card.append(h, p, links, nt); evEl.appendChild(card);
     });
   }
@@ -1594,7 +1595,7 @@ function addPreface(inner, it){
   const pf = document.createElement("div"); pf.className = "preface";
   const t = document.createElement("p"); t.className = "pf-t"; t.textContent = sd.tldr;
   const how = document.createElement("p"); how.className = "pf-how";
-  how.textContent = "读法：先看这段摘要，再展开导读看人物与事件脉络，最后读原文。摘要为 AI 生成，史实以原文为准。";
+  how.textContent = "读法：先看摘要 → 展开导读看主线（谁做了什么、结果如何）→ 再读原文；陌生支线人名先跳过，点「本篇词条」或页首“查人”。摘要为 AI 生成，史实以原文为准。";
   pf.append(t, how);
   const de = document.createElement("details"); de.className = "pf-digest";
   const su = document.createElement("summary"); su.textContent = "展开导读：史事脉络、关键判断、名句、关联篇目";
