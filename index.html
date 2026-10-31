@@ -1747,7 +1747,7 @@ function addPreface(inner, it){
   pf.append(t, before, how, modes);
   if ("speechSynthesis" in window){
     const sr = document.createElement("div"); sr.className = "speakrow";
-    const sp = document.createElement("button"); sp.type = "button"; sp.className = "speakbtn"; sp.textContent = "朗读本篇";
+    const sp = document.createElement("button"); sp.type = "button"; sp.className = "speakbtn"; sp.textContent = "朗读摘要";
     sp.addEventListener("click", () => speakChapter(it, sp));
     sr.appendChild(sp); pf.appendChild(sr);
   }
@@ -2159,7 +2159,7 @@ function speakChapter(it, btn){
   if (!("speechSynthesis" in window)) return;
   const synth = window.speechSynthesis;
   if (btn.getAttribute("aria-pressed") === "true"){
-    synth.cancel(); btn.setAttribute("aria-pressed", "false"); btn.textContent = "朗读本篇"; return;
+    synth.cancel(); btn.setAttribute("aria-pressed", "false"); btn.textContent = "朗读摘要"; return;
   }
   synth.cancel();
   const sd = STUDY()[it.n];
@@ -2179,7 +2179,7 @@ function speakChapter(it, btn){
   const vs = synth.getVoices() || [];
   const zh = vs.find(v => /zh|Chinese/i.test(v.lang + " " + v.name));
   if (zh) u.voice = zh;
-  u.onend = () => { btn.setAttribute("aria-pressed", "false"); btn.textContent = "朗读本篇"; };
+  u.onend = () => { btn.setAttribute("aria-pressed", "false"); btn.textContent = "朗读摘要"; };
   u.onerror = u.onend;
   synth.speak(u);
   btn.setAttribute("aria-pressed", "true"); btn.textContent = "停止朗读";
