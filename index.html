@@ -405,6 +405,65 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
 .who .chips a{font-family:var(--sans);font-size:11px;color:var(--jade);text-decoration:none;border:1px solid var(--line);padding:3px 7px;border-radius:2px}
 .who .chips a:hover{border-color:var(--jade)}
 .who .empty{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+
+/* ---------- 人物 / 时间轴 / 互见 / 阅读分层 ---------- */
+.ptool{margin:0 0 14px;max-width:420px}
+.ptool input{width:100%;font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--line);background:var(--slip);color:var(--ink);border-radius:2px;outline:none}
+.ptool input:focus{border-color:var(--jade)}
+.pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:980px){.pgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:720px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:440px){.pgrid{grid-template-columns:minmax(0,1fr)}}
+.pcard{background:var(--slip);border:0;text-align:left;padding:14px 14px 13px;font:inherit;color:inherit;cursor:pointer;min-width:0}
+.pcard:hover,.pcard:focus-visible{background:var(--jade-soft);outline:none}
+.pcard b{display:block;font-size:16px;margin-bottom:2px}
+.pcard span{display:block;font-size:11px;color:var(--muted);line-height:1.5}
+.pcard em{display:block;font-style:normal;font-size:12px;color:var(--ink2);line-height:1.6;margin-top:5px}
+.tfilters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}
+.tl{border-left:1px solid var(--line);margin-left:6px;padding-left:22px}
+.tlrow{position:relative;padding:0 0 20px}
+.tlrow:before{content:"";position:absolute;left:-27px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--jade)}
+.tly{font-family:var(--sans);font-size:11px;color:var(--jade);letter-spacing:.06em}
+.tlb b{display:block;font-size:15px;margin:2px 0 6px}
+.tll{display:flex;flex-wrap:wrap;gap:6px}
+.tll a{font-family:var(--sans);font-size:11px;color:var(--jade);text-decoration:none;border:1px solid var(--line);padding:3px 7px;border-radius:2px;background:var(--slip)}
+.tll a:hover{border-color:var(--jade)}
+.modal-bg{position:fixed;inset:0;background:rgba(20,24,20,.5);z-index:120;display:flex;align-items:center;justify-content:center;padding:22px}
+.modal-bg[hidden]{display:none}
+.modal{background:var(--slip);color:var(--ink);max-width:860px;width:100%;max-height:88vh;overflow:auto;border:1px solid var(--line);box-shadow:0 30px 80px -30px rgba(0,0,0,.55);padding:26px 26px 30px;position:relative}
+.mclose{position:absolute;top:10px;right:10px;width:34px;height:34px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);font-size:15px;cursor:pointer;border-radius:2px}
+.mclose:hover{color:var(--jade);border-color:var(--jade)}
+.pdetail h2{font-size:26px;margin:0 0 2px}
+.pdetail .palias{font-family:var(--sans);font-size:11.5px;letter-spacing:.06em;color:var(--muted);margin:0 0 10px}
+.pdetail .pid{font-size:15px;line-height:1.8;margin:0 0 18px}
+.pdetail h3{font-size:13px;letter-spacing:.08em;color:var(--muted);margin:20px 0 8px;font-family:var(--sans);font-weight:500}
+.pchips{display:flex;flex-wrap:wrap;gap:6px}
+.pchips a,.pchips button{font-family:var(--sans);font-size:11.5px;color:var(--jade);text-decoration:none;border:1px solid var(--line);padding:5px 8px;border-radius:2px;background:var(--paper);cursor:pointer}
+.pchips a:hover,.pchips button:hover{border-color:var(--jade)}
+.pchips .pl{color:var(--ink2);border-style:dashed;cursor:default}
+.pv h2{font-size:23px;margin:0 0 4px}
+.pv .pvnote{font-size:13px;color:var(--ink2);line-height:1.75;margin:0 0 18px}
+.pvcols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:720px){.pvcols{grid-template-columns:1fr}}
+.pvcol h4{font-family:var(--sans);font-size:12px;letter-spacing:.06em;color:var(--jade);margin:0 0 4px}
+.pvcol .pvtitle{font-size:13px;color:var(--muted);margin:0 0 10px}
+.pvcol .po{font-size:14px;line-height:1.8;margin:0 0 3px}
+.pvcol .pt{font-size:12.5px;color:var(--ink2);line-height:1.7;margin:0 0 12px}
+.pvbtn{font-family:var(--sans);font-size:11px;color:var(--jade);background:var(--paper);border:1px solid var(--line);padding:4px 8px;border-radius:2px;cursor:pointer;margin-top:8px}
+.pvbtn:hover{border-color:var(--jade)}
+.pf-before{margin:10px 0 4px;border-top:1px solid var(--line);padding-top:10px}
+.pf-before p{font-size:12.5px;line-height:1.75;margin:0 0 6px;color:var(--ink2)}
+.pf-before b{color:var(--ink);font-weight:600;margin-right:6px}
+.pf-before a,.pf-before button{font:inherit;font-size:12.5px;color:var(--jade);background:none;border:0;padding:0;border-bottom:1px dotted var(--jade);cursor:pointer;margin-right:8px}
+.modes{display:flex;flex-wrap:wrap;gap:1px;margin:10px 0 0;border:1px solid var(--line);width:max-content;max-width:100%}
+.modes button{font-family:var(--sans);font-size:11px;padding:5px 9px;border:0;background:var(--paper);color:var(--ink2);cursor:pointer}
+.modes button[aria-pressed="true"]{background:var(--jade);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .modes button[aria-pressed="true"]{color:#0f1412}}
+:root[data-theme="dark"] .modes button[aria-pressed="true"]{color:#0f1412}
+#jingdu.mode-story .unit .o,#jingdu.mode-story .unit button.an,#jingdu.mode-story .unit .n,#jingdu.mode-story .unit .anbox{display:none}
+#jingdu.mode-story .unit .v{font-size:16.5px;line-height:1.95}
+#jingdu.mode-text .unit .n,#jingdu.mode-text .unit button.an,#jingdu.mode-text .unit .anbox{display:none}
+
 .chref{color:var(--jade);text-decoration:none;border-bottom:1px dotted var(--jade);cursor:pointer}
 .resume{font-family:var(--sans);font-size:12.5px;color:var(--ink2);margin:0 0 16px}
 .resume a{color:var(--jade);text-decoration:none;border-bottom:1px solid var(--jade)}
@@ -438,6 +497,8 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
       <a href="#craft">用人 · 技法</a>
       <a href="#chapters">篇章 132</a>
       <a href="#topics">主题</a>
+      <a href="#people">人物</a>
+      <a href="#timeline">时间轴</a>
       <a href="#quick">速查</a>
       <a href="#terms">术语</a>
     </nav>
@@ -582,6 +643,21 @@ footer.page{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px
       <p class="eyebrow">索引</p>
       <h2>按主题找<small>点一个主题，回到上面筛出相关各篇。</small></h2>
       <div class="topics" id="topics"></div>
+    </section>
+
+
+    <section id="people">
+      <p class="eyebrow">人物</p>
+      <h2>先认人，再读事<small>点一个人，看他是谁、和谁有关系、在哪几篇出场。人名不是用来背的，是用来认路的。</small></h2>
+      <div class="ptool"><input id="pq" type="search" placeholder="搜：项羽、韩信、李广…" autocomplete="off" aria-label="搜人物"></div>
+      <div class="pgrid" id="pgrid"></div>
+    </section>
+
+    <section id="timeline">
+      <p class="eyebrow">时间轴</p>
+      <h2>三千年，一条线<small>先记住十几个节点，再读任何一篇都能定位。点年份旁的篇名直接读。</small></h2>
+      <div class="tfilters" id="tfilters"></div>
+      <div class="tl" id="tl"></div>
     </section>
 
     <section id="quick">
@@ -844,9 +920,15 @@ function open(id, opts){
     extra.className = "guide-extra"; extra.innerHTML = it.h;
     const dup = extra.querySelector("h2"); if (dup) dup.remove();
     linkifyChRefs(extra);
+    const bfg = buildBefore(it), h2g = extra.querySelector("h2");
+    if (h2g) h2g.after(bfg); else extra.prepend(bfg);
     inner.appendChild(extra);
   }
-  else { inner.innerHTML = it.h; linkifyChRefs(inner); }
+  else {
+    inner.innerHTML = it.h; linkifyChRefs(inner);
+    const bf = buildBefore(it), h2p = inner.querySelector("h2");
+    if (h2p) h2p.after(bf); else inner.prepend(bf);
+  }
   addPreface(inner, it); addNext(inner, it);
   if (it.g === "表序" && it.n !== 132){
     const tip = document.createElement("p");
@@ -1280,7 +1362,7 @@ window.addEventListener("afterprint", () => {
 /* 页内引用：data-open 直接开篇 */
 document.addEventListener("click", e => {
   const t = e.target.closest("[data-open]");
-  if (t){ e.preventDefault(); open(t.getAttribute("data-open")); return; }
+  if (t){ e.preventDefault(); closeModal(); open(t.getAttribute("data-open")); return; }
   const c = e.target.closest("[data-close]");
   if (c){ e.preventDefault(); close(); }
 });
@@ -1499,6 +1581,13 @@ function renderStart(){
       ev.also.forEach(n => links.appendChild(chAnchor(n, "别叙 · " + shortTitle(n))));
       const nt = document.createElement("p"); nt.className = "note"; nt.textContent = ev.note;
       linkifyChRefs(nt);
+      const par = PARALLEL.find(x => x.t === ev.t);
+      if (par){
+        const pb = document.createElement("button"); pb.type = "button"; pb.className = "pvbtn";
+        pb.textContent = "对照原文";
+        pb.addEventListener("click", () => openParallel(par));
+        card.appendChild(pb);
+      }
       card.append(h, p, links, nt); evEl.appendChild(card);
     });
   }
@@ -1594,9 +1683,16 @@ function addPreface(inner, it){
   if (!sd || !sd.tldr) return;
   const pf = document.createElement("div"); pf.className = "preface";
   const t = document.createElement("p"); t.className = "pf-t"; t.textContent = sd.tldr;
+  const before = buildBefore(it);
   const how = document.createElement("p"); how.className = "pf-how";
   how.textContent = "读法：先看摘要 → 展开导读看主线（谁做了什么、结果如何）→ 再读原文；陌生支线人名先跳过，点「本篇词条」或页首“查人”。摘要为 AI 生成，史实以原文为准。";
-  pf.append(t, how);
+  const modes = document.createElement("div"); modes.className = "modes"; modes.setAttribute("role", "group"); modes.setAttribute("aria-label", "阅读难度");
+  [["story","故事 · 只译文"],["text","原文 + 译文"],["study","研究 · 注释全开"]].forEach(([m, label]) => {
+    const b = document.createElement("button"); b.type = "button"; b.dataset.mode = m; b.textContent = label;
+    b.addEventListener("click", () => setMode(m));
+    modes.appendChild(b);
+  });
+  pf.append(t, before, how, modes);
   const de = document.createElement("details"); de.className = "pf-digest";
   const su = document.createElement("summary"); su.textContent = "展开导读：史事脉络、关键判断、名句、关联篇目";
   const body = document.createElement("div"); body.className = "pf-body";
@@ -1606,13 +1702,357 @@ function addPreface(inner, it){
   de.append(su, body); pf.append(de);
   const h2 = inner.querySelector("h2");
   if (h2) h2.after(pf); else inner.prepend(pf);
+  setMode(store.get("shiji.mode", "text"), false);
 }
-renderStart();
+
+const PEOPLE = [
+{n:8,name:"项羽",alias:"名籍，字羽；西楚霸王",id:"楚国名将项燕之孙，反秦联军首领。",chs:[7,8,9,31,75],rel:[["项梁","叔父"],["刘邦","对手"],["范增","谋主"],["虞姬","宠姬"]],ev:["巨鹿之战","鸿门宴","垓下之战"]},
+{n:9,name:"刘邦",alias:"字季；汉高祖",id:"沛县人，汉朝开国皇帝。",chs:[8,9,10,36,38,75,78],rel:[["吕后","妻"],["项羽","对手"],["韩信","将"],["萧何","相"],["张良","谋臣"]],ev:["鸿门宴","楚汉相争","垓下之战"]},
+{n:75,name:"韩信",alias:"淮阴侯",id:"淮阴人，刘邦大将，封淮阴侯，后以谋反被诛。",chs:[8,9,36,38,75,92],rel:[["萧何","举荐者"],["刘邦","君"],["吕后","杀他者"],["张耳","战友"]],ev:["楚汉相争","垓下之战"]},
+{n:38,name:"张良",alias:"字子房；留侯",id:"韩国贵族，刘邦谋臣，封留侯。",chs:[7,8,9,38],rel:[["刘邦","君"],["项伯","故交"],["韩信","同僚"]],ev:["鸿门宴","楚汉相争"]},
+{n:36,name:"萧何",alias:"酂侯；汉相国",id:"沛县人，刘邦相国，汉初制度的设计者。",chs:[8,9,36,37,75],rel:[["刘邦","君"],["韩信","举荐者/诱杀"],["曹参","继任者"]],ev:["楚汉相争"]},
+{n:78,name:"樊哙",alias:"舞阳侯；刘邦连襟",id:"沛县人，刘邦部将，鸿门宴闯帐，封舞阳侯。",chs:[7,8,9,78],rel:[["刘邦","君/连襟"],["吕后","妻姊"],["项羽","鸿门宴对手"]],ev:["鸿门宴"]},
+{n:8,name:"范增",alias:"亚父",id:"居鄛人，项羽谋主，尊为亚父，后遭疑离去。",chs:[7,8],rel:[["项羽","谋主"],["刘邦","对手"]],ev:["鸿门宴"]},
+{n:8,name:"项伯",alias:"射阳侯；项羽叔父",id:"项羽叔父，鸿门宴夜告张良，后封射阳侯。",chs:[7,8,9],rel:[["项羽","叔父"],["张良","故交"],["刘邦","约为婚姻"]],ev:["鸿门宴"]},
+{n:7,name:"秦始皇",alias:"嬴政；秦始皇帝",id:"嬴政，秦朝开国皇帝，统一六国。",chs:[6,7,70,71],rel:[["扶苏","长子"],["胡亥","少子"],["李斯","丞相"],["赵高","中车府令"],["蒙恬","将"]],ev:["沙丘之变"]},
+{n:70,name:"李斯",alias:"秦丞相",id:"楚上蔡人，秦丞相，沙丘之变参与者，后腰斩。",chs:[6,7,70,71],rel:[["秦始皇","丞相"],["赵高","同谋/陷害"],["韩非","同门"],["胡亥","君"]],ev:["沙丘之变"]},
+{n:70,name:"赵高",alias:"秦中车府令",id:"秦中车府令，沙丘改诏，杀二世，后被诛。",chs:[7,70,71],rel:[["秦始皇","中车府令"],["胡亥","拥立"],["李斯","同谋/陷害"],["扶苏","矫诏杀"]],ev:["沙丘之变"]},
+{n:7,name:"胡亥",alias:"秦二世",id:"秦始皇少子，秦二世，被赵高拥立。",chs:[7,70,71],rel:[["秦始皇","父"],["赵高","拥立"],["李斯","丞相"],["扶苏","兄"]],ev:["沙丘之变"]},
+{n:7,name:"扶苏",alias:"秦公子",id:"始皇长子，被矫诏赐死。",chs:[7,70,71],rel:[["秦始皇","父"],["蒙恬","监军"],["胡亥","弟"],["赵高","矫诏杀"]],ev:["沙丘之变"]},
+{n:71,name:"蒙恬",alias:"秦将",id:"秦将，北逐匈奴、筑长城，被赐死。",chs:[7,70,71],rel:[["秦始皇","将"],["扶苏","监军"],["蒙毅","弟"]],ev:["沙丘之变"]},
+{n:56,name:"白起",alias:"武安君",id:"秦将，封武安君，长平之战坑赵卒，后赐死。",chs:[6,56,64,73],rel:[["秦昭王","君"],["范雎","隙"],["赵括","对手"],["廉颇","对手"]],ev:["长平之战"]},
+{n:64,name:"廉颇",alias:"赵将；信平君",id:"赵将，负荆请罪、长平被赵括代，后奔魏楚。",chs:[26,56,64],rel:[["赵惠文王","君"],["蔺相如","将相和"],["赵括","继任"],["乐乘","隙"]],ev:["长平之战"]},
+{n:64,name:"蔺相如",alias:"赵上卿",id:"赵上卿，完璧归赵、渑池会、将相和。",chs:[26,64],rel:[["赵惠文王","君"],["廉颇","将相和"],["缪贤","举荐者"]],ev:["长平之战"]},
+{n:64,name:"赵括",alias:"马服子",id:"赵奢之子，长平之战代廉颇，兵败身死。",chs:[26,56,64],rel:[["赵奢","父"],["廉颇","前任"],["白起","对手"]],ev:["长平之战"]},
+{n:60,name:"信陵君",alias:"魏无忌；魏公子",id:"魏无忌，魏公子，窃符救赵，合纵破秦。",chs:[26,27,60],rel:[["魏安釐王","兄/君"],["侯嬴","门客"],["朱亥","门客"],["平原君","姐夫"]],ev:["窃符救赵"]},
+{n:59,name:"平原君",alias:"赵胜；赵公子",id:"赵胜，赵公子，毛遂自荐，邯郸之围。",chs:[26,59,60],rel:[["赵惠文王","弟"],["信陵君","妻弟"],["毛遂","门客"]],ev:["邯郸之围"]},
+{n:58,name:"孟尝君",alias:"田文；薛公",id:"田文，齐公子，鸡鸣狗盗、狡兔三窟。",chs:[29,58],rel:[["齐湣王","君"],["冯驩","门客"]],ev:[]},
+{n:61,name:"春申君",alias:"黄歇；楚令尹",id:"黄歇，楚令尹，后死于李园之乱。",chs:[23,61],rel:[["楚考烈王","君"],["李园","杀他者"]],ev:[]},
+{n:49,name:"伍子胥",alias:"伍员；申胥",id:"楚人奔吴，助阖庐破楚，后谏夫差被赐死。",chs:[14,23,24,49],rel:[["楚平王","仇"],["阖庐","君"],["夫差","君/赐死"],["孙武","同僚"]],ev:["吴越争霸"]},
+{n:24,name:"勾践",alias:"越王",id:"越王，败于吴后尝胆自励，终灭吴。",chs:[14,24,49],rel:[["夫差","对手"],["范蠡","谋臣"],["文种","谋臣"]],ev:["吴越争霸"]},
+{n:14,name:"夫差",alias:"吴王",id:"吴王，败越、争霸，后为勾践所灭。",chs:[14,24,49],rel:[["阖庐","父"],["勾践","对手"],["伍子胥","谏臣/赐死"],["伯嚭","宠臣"]],ev:["吴越争霸"]},
+{n:24,name:"范蠡",alias:"陶朱公",id:"越国谋臣，功成身退，后为陶朱公。",chs:[24],rel:[["勾践","君"],["文种","同僚"]],ev:["吴越争霸"]},
+{n:30,name:"孔子",alias:"孔丘，字仲尼",id:"鲁人，儒家创始人，《史记》列为世家。",chs:[16,30,50],rel:[["颜回","弟子"],["子路","弟子"],["子贡","弟子"],["老子","问礼"]],ev:[]},
+{n:51,name:"商鞅",alias:"卫鞅；商君",id:"卫人，秦孝公变法，后车裂。",chs:[5,6,51,70],rel:[["秦孝公","君"],["公子虔","仇"]],ev:[]},
+{n:40,name:"周勃",alias:"绛侯",id:"沛人，绛侯，诛诸吕，周亚夫之父。",chs:[9,10,40],rel:[["刘邦","君"],["陈平","同谋诛诸吕"],["周亚夫","子"]],ev:["诸吕之乱"]},
+{n:40,name:"周亚夫",alias:"条侯",id:"周勃之子，细柳营、平七国之乱，后下狱死。",chs:[10,12,40,89],rel:[["周勃","父"],["汉景帝","君"],["梁孝王","隙"]],ev:["七国之乱"]},
+{n:84,name:"晁错",alias:"景帝御史大夫",id:"颍川人，景帝御史大夫，主削藩，七国之乱中被诛。",chs:[11,12,84,89],rel:[["汉景帝","君"],["袁盎","政敌"]],ev:["七国之乱"]},
+{n:89,name:"吴王濞",alias:"刘濞",id:"刘濞，刘邦侄，七国之乱首领。",chs:[12,35,84,89],rel:[["刘邦","叔/君"],["晁错","削藩"],["周亚夫","对手"]],ev:["七国之乱"]},
+{n:13,name:"汉武帝",alias:"刘彻",id:"汉武帝刘彻，封禅、伐匈奴。",chs:[13,32,93,94,95,119,121],rel:[["王太后","母"],["卫子夫","后"],["卫青","妻弟"],["霍去病","外甥"],["司马迁","臣"]],ev:[]},
+{n:94,name:"卫青",alias:"大将军；长平侯",id:"卫子夫弟，大将军，击匈奴。",chs:[32,93,94],rel:[["汉武帝","君/妻弟"],["卫子夫","姊"],["霍去病","外甥"],["李广","同僚/隙"],["平阳公主","妻"]],ev:["漠北之战"]},
+{n:94,name:"霍去病",alias:"骠骑将军；冠军侯",id:"卫青外甥，骠骑将军，封狼居胥。",chs:[32,93,94],rel:[["卫青","舅"],["汉武帝","君"],["匈奴","敌"]],ev:["河西之战","漠北之战"]},
+{n:92,name:"李广",alias:"飞将军",id:"陇西人，飞将军，终身未得封侯，自刎。",chs:[92,93,94],rel:[["卫青","上司/隙"],["李敢","子"],["程不识","同僚"]],ev:["漠北之战"]},
+{n:1,name:"司马迁",alias:"字子长；太史令",id:"太史令，受李陵之祸，著《史记》。",chs:[1,113,122],rel:[["司马谈","父"],["汉武帝","君"],["李陵","友/辩护"],["任安","友"]],ev:["李陵之祸"]},
+{n:44,name:"伯夷",alias:"孤竹君之子",id:"孤竹君之子，让国、采薇，饿死首阳山。",chs:[44],rel:[["叔齐","弟"],["孤竹君","父"]],ev:[]},
+{n:67,name:"屈原",alias:"屈平；三闾大夫",id:"楚大夫，《离骚》作者，投汨罗江。",chs:[23,67,122],rel:[["楚怀王","君"],["上官大夫","政敌"],["张仪","敌"]],ev:[]},
+{n:31,name:"陈胜",alias:"字涉；张楚王",id:"阳城人，大泽乡起义，张楚王，被车夫杀。",chs:[7,8,9,31],rel:[["吴广","同伴"],["秦二世","敌"],["章邯","对手"]],ev:["大泽乡起义"]},
+{n:72,name:"张耳",alias:"赵王；常山王",id:"大梁人，赵王，与陈馀由刎颈到反目。",chs:[7,8,9,72,75],rel:[["陈馀","刎颈/反目"],["刘邦","君"],["韩信","战友"]],ev:["楚汉相争"]},
+{n:72,name:"陈馀",alias:"成安君",id:"大梁人，赵将，与张耳反目，井陉败死。",chs:[7,8,9,72,75],rel:[["张耳","反目"],["赵王歇","君"],["韩信","对手"]],ev:["楚汉相争"]},
+{n:77,name:"田横",alias:"齐王",id:"齐王田荣之弟，五百士，自刎。",chs:[7,8,9,77],rel:[["田荣","兄"],["刘邦","敌/招降"],["五百士","部属"]],ev:[]},
+{n:10,name:"吕后",alias:"吕雉；高后",id:"吕雉，刘邦妻，临朝称制，分封诸吕。",chs:[8,9,10,32,40],rel:[["刘邦","夫"],["惠帝","子"],["戚夫人","敌"],["周勃","诛诸吕"],["陈平","诛诸吕"]],ev:["诸吕之乱"]},
+{n:11,name:"汉文帝",alias:"刘恒",id:"刘恒，代王入继，文景之治。",chs:[9,10,11,40,84],rel:[["刘邦","父"],["薄太后","母"],["周勃","功臣"],["贾谊","臣"]],ev:["诸吕之乱"]},
+{n:12,name:"汉景帝",alias:"刘启",id:"刘启，平七国之乱。",chs:[10,11,12,40,89],rel:[["汉文帝","父"],["窦太后","母"],["晁错","臣/杀"],["周亚夫","臣/隙"],["梁孝王","弟"]],ev:["七国之乱"]},
+{n:63,name:"乐毅",alias:"昌国君",id:"燕将，破齐七十余城，后奔赵。",chs:[15,63,65],rel:[["燕昭王","君"],["燕惠王","疑"],["田单","对手"]],ev:[]},
+{n:65,name:"田单",alias:"安平君",id:"齐将，火牛阵复齐。",chs:[15,63,65],rel:[["齐襄王","君"],["乐毅","对手"]],ev:[]},
+{n:68,name:"吕不韦",alias:"文信侯；秦相",id:"秦相，奇货可居，主编《吕氏春秋》。",chs:[6,7,68,70],rel:[["秦庄襄王","君"],["秦始皇","传闻父子"],["嫪毐","荐入宫"]],ev:[]},
+{n:69,name:"荆轲",alias:"荆卿",id:"卫人，刺秦王，失败被杀。",chs:[7,69],rel:[["燕太子丹","主"],["秦王政","目标"],["高渐离","友"],["樊於期","借头"]],ev:[]},
+{n:47,name:"司马穰苴",alias:"田穰苴",id:"齐将，斩庄贾以立军法。",chs:[47],rel:[["齐景公","君"],["庄贾","斩"],["晏婴","举荐者"]],ev:[]},
+{n:48,name:"孙武",alias:"孙子",id:"齐人，以《孙子兵法》见吴王阖庐。",chs:[48],rel:[["吴王阖庐","君"],["伍子胥","同僚"]],ev:[]},
+{n:48,name:"孙膑",alias:"孙武之后",id:"齐军师，桂陵、马陵破魏。",chs:[29,48],rel:[["田忌","将"],["庞涓","同学/仇"]],ev:["桂陵之战","马陵之战"]},
+{n:48,name:"吴起",alias:"吴子",id:"卫人，魏楚名将，楚悼王时变法。",chs:[48],rel:[["魏文侯","君"],["楚悼王","君"]],ev:[]},
+{n:91,name:"韩安国",alias:"韩长孺",id:"梁国名臣，武帝朝御史大夫，主和亲。",chs:[41,91,93],rel:[["梁孝王","君"],["田蚡","援引"],["王恢","和亲之争"]],ev:["马邑之谋"]}
+];
+const PMAP = Object.fromEntries(PEOPLE.map(p => [p.name, p]));
+
+const TIMELINE = [
+{y:-770,era:"先秦",t:"平王东迁，春秋开始",chs:[5]},
+{y:-551,era:"先秦",t:"孔子生",chs:[30,50]},
+{y:-473,era:"先秦",t:"越灭吴",chs:[24,49,14]},
+{y:-453,era:"先秦",t:"三家灭智，晋国被瓜分",chs:[22,26,27,28]},
+{y:-403,era:"先秦",t:"周王承认赵、魏、韩为诸侯",chs:[22,26,27,28]},
+{y:-356,era:"先秦",t:"商鞅在秦变法",chs:[51,6]},
+{y:-284,era:"先秦",t:"乐毅破齐",chs:[63,15,65]},
+{y:-279,era:"先秦",t:"田单火牛复齐",chs:[65,63]},
+{y:-260,era:"先秦",t:"长平之战",chs:[56,64,26]},
+{y:-256,era:"先秦",t:"秦灭周",chs:[5,6]},
+{y:-246,era:"先秦",t:"嬴政即位",chs:[7]},
+{y:-221,era:"先秦",t:"秦统一六国",chs:[6,7]},
+{y:-210,era:"秦末",t:"始皇崩于沙丘",chs:[7,70,71]},
+{y:-209,era:"秦末",t:"陈胜、吴广起兵",chs:[31,7,8]},
+{y:-207,era:"秦末",t:"巨鹿之战",chs:[8,7,31]},
+{y:-206,era:"秦末",t:"鸿门宴；秦亡",chs:[8,9,38,78]},
+{y:-205,era:"楚汉",t:"彭城之战",chs:[8,9,75]},
+{y:-203,era:"楚汉",t:"韩信破齐",chs:[75,80,8]},
+{y:-202,era:"楚汉",t:"垓下之战；汉建立",chs:[8,9,75]},
+{y:-200,era:"汉初",t:"白登之围",chs:[93,82,9]},
+{y:-196,era:"汉初",t:"韩信、彭越被杀",chs:[75,73,10]},
+{y:-195,era:"汉初",t:"刘邦崩",chs:[9,10]},
+{y:-180,era:"汉初",t:"诸吕之乱；文帝即位",chs:[10,11,40]},
+{y:-154,era:"汉初",t:"七国之乱",chs:[12,89,84,40]},
+{y:-141,era:"汉初",t:"景帝崩，武帝即位",chs:[12,13]},
+{y:-133,era:"武帝",t:"马邑之谋",chs:[93,94,91]},
+{y:-127,era:"武帝",t:"卫青收河南地",chs:[93,94]},
+{y:-121,era:"武帝",t:"霍去病河西之战",chs:[93,94]},
+{y:-119,era:"武帝",t:"漠北之战",chs:[93,94,92]},
+{y:-110,era:"武帝",t:"武帝封禅泰山",chs:[13,119]},
+{y:-104,era:"武帝",t:"太初改历",chs:[13,117]},
+{y:-99,era:"武帝",t:"李陵之祸；司马迁受刑",chs:[1,122,113]},
+{y:-91,era:"武帝",t:"《史记》基本成书",chs:[1,113,122]}
+];
+
+const PARALLEL = [
+{t:"鸿门宴",note:"同一场饭局：项羽本纪写全过程（项庄舞剑、樊哙闯帐、刘邦如厕），高祖本纪只用几句带过。详略不同，就是互见。",
+ a:{n:8,from:"沛公旦日从百余骑来见项王",to:"沛公起如厕，因招樊哙出"},
+ b:{n:9,from:"会项伯欲活张良",to:"归，立诛曹无伤"}},
+{t:"长平之战",note:"白起王翦列传写战场与坑卒；廉颇蔺相如列传写换将的决策、赵括母亲的劝阻。一个写结果，一个写为什么换人。",
+ a:{n:56,from:"廉颇坚壁以待秦",to:"卒四十万人降武安君"},
+ b:{n:64,from:"七年，秦与赵兵相距长平",to:"赵前后所亡凡四十五万"}},
+{t:"沙丘之变",note:"秦始皇本纪写事件经过；李斯列传从赵高找李斯开始，写他怎样一步步把李斯拖下水。同一件事，一个记结果，一个记人心。",
+ a:{n:7,from:"上病益甚，乃为玺书赐公子扶苏",to:"语具在《李斯传》中"},
+ b:{n:70,from:"高乃谓丞相斯曰",to:"于是斯乃听高"}},
+{t:"七国之乱",note:"孝景本纪只用几句记结果；吴王濞列传保存了起兵檄文，能看出叛军怎样动员。",
+ a:{n:12,from:"吴王濞、楚王戊",to:"封大将军窦婴为魏其侯"},
+ b:{n:89,from:"孝景帝三年正月甲子",to:"愿王勉之"}}
+];
+
+
+function yearLabel(y){ return y < 0 ? "前" + (-y) : String(y); }
+function renderPeople(){
+  const grid = document.getElementById("pgrid");
+  if (!grid) return;
+  const draw = (q) => {
+    grid.innerHTML = "";
+    const list = PEOPLE.filter(p => !q || (p.name + p.alias + p.id).includes(q));
+    if (!list.length){
+      const e = document.createElement("p"); e.className = "empty";
+      e.textContent = "没有找到。换个更短的词。"; grid.appendChild(e); return;
+    }
+    list.forEach(p => {
+      const b = document.createElement("button"); b.type = "button"; b.className = "pcard";
+      const n = document.createElement("b"); n.textContent = p.name;
+      const al = document.createElement("span"); al.textContent = p.alias;
+      const id = document.createElement("em"); id.textContent = p.id;
+      b.append(n, al, id);
+      b.addEventListener("click", () => openPerson(p.name));
+      grid.appendChild(b);
+    });
+  };
+  draw("");
+  const input = document.getElementById("pq");
+  if (input) input.addEventListener("input", () => draw(input.value.trim()));
+}
+function renderTimeline(){
+  const wrap = document.getElementById("tl"), filters = document.getElementById("tfilters");
+  if (!wrap || !filters) return;
+  const eras = ["全部", "先秦", "秦末", "楚汉", "汉初", "武帝"];
+  let cur = "全部";
+  const draw = () => {
+    wrap.innerHTML = "";
+    TIMELINE.filter(e => cur === "全部" || e.era === cur).forEach(e => {
+      const row = document.createElement("div"); row.className = "tlrow";
+      const y = document.createElement("div"); y.className = "tly"; y.textContent = yearLabel(e.y);
+      const b = document.createElement("div"); b.className = "tlb";
+      const t = document.createElement("b"); t.textContent = e.t;
+      const links = document.createElement("div"); links.className = "tll";
+      e.chs.forEach(n => links.appendChild(chAnchor(n)));
+      b.append(t, links); row.append(y, b); wrap.appendChild(row);
+    });
+  };
+  eras.forEach(name => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "chip";
+    b.textContent = name; b.setAttribute("aria-pressed", String(name === cur));
+    b.addEventListener("click", () => {
+      cur = name;
+      [...filters.children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
+      draw();
+    });
+    filters.appendChild(b);
+  });
+  draw();
+}
+function openModal(node){
+  const body = document.getElementById("mbody"), bg = document.getElementById("mbg");
+  if (!body || !bg) return;
+  body.replaceChildren(node);
+  bg.hidden = false;
+  document.documentElement.classList.add("modal-open");
+  try { document.getElementById("mclose").focus({preventScroll:true}); } catch(e){}
+}
+function closeModal(){
+  const bg = document.getElementById("mbg");
+  if (!bg || bg.hidden) return;
+  bg.hidden = true;
+  const body = document.getElementById("mbody"); if (body) body.replaceChildren();
+  document.documentElement.classList.remove("modal-open");
+}
+function openPerson(name){
+  const p = PMAP[name]; if (!p) return;
+  const box = document.createElement("div"); box.className = "pdetail";
+  const h = document.createElement("h2"); h.id = "mtitle"; h.textContent = p.name;
+  const al = document.createElement("p"); al.className = "palias"; al.textContent = p.alias;
+  const id = document.createElement("p"); id.className = "pid"; id.textContent = p.id;
+  box.append(h, al, id);
+  if (p.rel && p.rel.length){
+    const h3 = document.createElement("h3"); h3.textContent = "关系";
+    const chips = document.createElement("div"); chips.className = "pchips";
+    p.rel.forEach(([who, type]) => {
+      if (PMAP[who]){
+        const b = document.createElement("button"); b.type = "button";
+        b.textContent = who + " · " + type;
+        b.addEventListener("click", () => openPerson(who));
+        chips.appendChild(b);
+      } else {
+        const sp = document.createElement("span"); sp.className = "pl";
+        sp.textContent = who + " · " + type; chips.appendChild(sp);
+      }
+    });
+    box.append(h3, chips);
+  }
+  if (p.ev && p.ev.length){
+    const h3 = document.createElement("h3"); h3.textContent = "关键事件";
+    const chips = document.createElement("div"); chips.className = "pchips";
+    p.ev.forEach(e => { const sp = document.createElement("span"); sp.className = "pl"; sp.textContent = e; chips.appendChild(sp); });
+    box.append(h3, chips);
+  }
+  if (p.chs && p.chs.length){
+    const h3 = document.createElement("h3"); h3.textContent = "主要篇目";
+    const chips = document.createElement("div"); chips.className = "pchips";
+    p.chs.forEach(n => chips.appendChild(chAnchor(n)));
+    box.append(h3, chips);
+    if (typeof searchIndex === "function"){
+      const extra = searchIndex().filter(x => x.lo.includes(p.name)).map(x => x.it)
+        .filter(x => !p.chs.includes(x.n)).slice(0, 8);
+      if (extra.length){
+        const h4 = document.createElement("h3"); h4.textContent = "其他出现";
+        const c2 = document.createElement("div"); c2.className = "pchips";
+        extra.forEach(x => c2.appendChild(chAnchor(x.n)));
+        box.append(h4, c2);
+      }
+    }
+  }
+  openModal(box);
+}
+function sliceUnits(n, from, to){
+  const c = JD[n]; if (!c) return [];
+  const units = [];
+  for (const sec of c.s) for (const u of sec.u) units.push(u);
+  let a = units.findIndex(u => u[0].includes(from));
+  if (a < 0) return [];
+  let b = -1;
+  for (let i = a; i < units.length; i++){ if (units[i][0].includes(to)){ b = i; break; } }
+  if (b < 0) b = Math.min(a + 10, units.length - 1);
+  return units.slice(a, b + 1);
+}
+function openParallel(p){
+  const box = document.createElement("div"); box.className = "pv";
+  const h = document.createElement("h2"); h.id = "mtitle"; h.textContent = p.t;
+  const note = document.createElement("p"); note.className = "pvnote"; note.textContent = p.note;
+  const cols = document.createElement("div"); cols.className = "pvcols";
+  const mkcol = (spec) => {
+    const col = document.createElement("div"); col.className = "pvcol";
+    const it = items.find(x => x.n === spec.n);
+    const h4 = document.createElement("h4");
+    h4.textContent = "ch" + String(spec.n).padStart(3,"0") + " · " + shortTitle(spec.n);
+    const title = document.createElement("p"); title.className = "pvtitle"; title.textContent = it ? it.t : "";
+    col.append(h4, title);
+    const units = sliceUnits(spec.n, spec.from, spec.to);
+    if (!units.length){
+      const miss = document.createElement("p"); miss.className = "pt"; miss.textContent = "这一段未能定位。";
+      col.appendChild(miss);
+    } else {
+      units.forEach(u => {
+        const o = document.createElement("p"); o.className = "po"; o.textContent = u[0];
+        const t = document.createElement("p"); t.className = "pt"; t.textContent = u[1];
+        col.append(o, t);
+      });
+    }
+    return col;
+  };
+  cols.append(mkcol(p.a), mkcol(p.b));
+  box.append(h, note, cols);
+  openModal(box);
+}
+function setMode(m, save){
+  if (save !== false) store.set("shiji.mode", m);
+  const j = document.getElementById("jingdu");
+  if (j){
+    j.classList.remove("mode-story", "mode-text", "mode-study");
+    j.classList.add("mode-" + m);
+  }
+  document.querySelectorAll(".modes button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
+}
+function buildBefore(it){
+  const box = document.createElement("div"); box.className = "pf-before";
+  let doc = null;
+  try { doc = new DOMParser().parseFromString(it.h, "text/html"); } catch(e){}
+  if (!doc) return box;
+  const hs = [...doc.querySelectorAll("h3")];
+  const core = hs.find(h => h.textContent.trim() === "核心");
+  let bg = "";
+  if (core){
+    let el = core.nextElementSibling;
+    while (el && el.tagName !== "P") el = el.nextElementSibling;
+    if (el) bg = el.textContent.trim();
+  }
+  bg = bg.split("。").slice(0, 2).join("。");
+  if (bg && !bg.endsWith("。")) bg += "。";
+  if (bg){
+    const p = document.createElement("p");
+    const b = document.createElement("b"); b.textContent = "背景";
+    p.append(b, bg); box.appendChild(p);
+  }
+  const body = doc.body.textContent || "";
+  const ppl = PEOPLE.filter(p => body.includes(p.name)).slice(0, 3);
+  const p2 = document.createElement("p");
+  const b2 = document.createElement("b"); b2.textContent = "先认人"; p2.appendChild(b2);
+  if (ppl.length){
+    ppl.forEach(p => {
+      const btn = document.createElement("button"); btn.type = "button"; btn.textContent = p.name;
+      btn.addEventListener("click", () => openPerson(p.name));
+      p2.appendChild(btn);
+    });
+  } else {
+    p2.append("本篇人物见标题；陌生词点「本篇词条」。");
+  }
+  box.appendChild(p2);
+  const links = [...new Set((it.h.match(/ch\d{1,3}/g) || []).map(x => Number(x.slice(2))))]
+    .filter(n => n !== it.n).slice(0, 2);
+  if (links.length){
+    const p3 = document.createElement("p");
+    const b3 = document.createElement("b"); b3.textContent = "先读/对照"; p3.appendChild(b3);
+    links.forEach(n => p3.appendChild(chAnchor(n, "ch" + String(n).padStart(3,"0") + " " + shortTitle(n))));
+    box.appendChild(p3);
+  }
+  return box;
+}
+
+renderStart(); renderPeople(); renderTimeline();
+
+/* ---------- 弹层 ---------- */
+const _mbg = document.getElementById("mbg");
+if (_mbg){
+  document.getElementById("mclose").addEventListener("click", closeModal);
+  _mbg.addEventListener("click", e => { if (e.target === _mbg) closeModal(); });
+  document.addEventListener("keydown", e => {
+    const bg = document.getElementById("mbg");
+    if (e.key === "Escape" && bg && !bg.hidden){
+      e.stopImmediatePropagation(); e.preventDefault(); closeModal();
+    }
+  }, true);
+}
 
 /* ---------- 首屏 ---------- */
 render();
 const idle = window.requestIdleCallback || (fn => setTimeout(fn, 1500));
 idle(() => { try { JD[2]; } catch(e){} });
 </script>
+
+<div class="modal-bg" id="mbg" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+    <button class="mclose" id="mclose" type="button" aria-label="关闭">✕</button>
+    <div id="mbody"></div>
+  </div>
+</div>
 </body>
 </html>
