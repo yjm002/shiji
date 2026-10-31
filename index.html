@@ -1640,6 +1640,14 @@ function renderStart(){
         pb.addEventListener("click", () => openParallel(par));
         card.appendChild(pb);
       }
+      const shb = document.createElement("button");
+      shb.type = "button"; shb.className = "pvbtn"; shb.textContent = "分享卡";
+      shb.addEventListener("click", () => shareCard({
+        title: ev.t, subtitle: "同一件事，几篇都在讲",
+        lines: [ev.one, ev.note].filter(Boolean),
+        footer: "史记总览 · yjm002.github.io/shiji"
+      }));
+      card.appendChild(shb);
       card.append(h, p, links, nt); evEl.appendChild(card);
     });
   }
