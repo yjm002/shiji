@@ -1634,11 +1634,11 @@ function renderStart(){
       const nt = document.createElement("p"); nt.className = "note"; nt.textContent = ev.note;
       linkifyChRefs(nt);
       const par = PARALLEL.find(x => x.t === ev.t);
+      let pb = null;
       if (par){
-        const pb = document.createElement("button"); pb.type = "button"; pb.className = "pvbtn";
+        pb = document.createElement("button"); pb.type = "button"; pb.className = "pvbtn";
         pb.textContent = "对照原文";
         pb.addEventListener("click", () => openParallel(par));
-        card.appendChild(pb);
       }
       const shb = document.createElement("button");
       shb.type = "button"; shb.className = "pvbtn"; shb.textContent = "分享卡";
@@ -1647,8 +1647,10 @@ function renderStart(){
         lines: [ev.one, ev.note].filter(Boolean),
         footer: "史记总览 · yjm002.github.io/shiji"
       }));
+      card.append(h, p, links, nt);
+      if (pb) card.appendChild(pb);
       card.appendChild(shb);
-      card.append(h, p, links, nt); evEl.appendChild(card);
+      evEl.appendChild(card);
     });
   }
   const resume = document.getElementById("resume");
