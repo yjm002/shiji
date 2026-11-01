@@ -733,28 +733,97 @@ footer.page a:hover{border-bottom-color:var(--jade)}
 .zitem:last-child{margin-bottom:0}
 .zitem b{display:inline-block;font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--seal);border:1px solid currentColor;border-radius:3px;padding:0 4px;margin-right:7px;vertical-align:1px;white-space:nowrap}
 @media (max-width:720px){ .zitem{font-size:12.5px} }
+
+/* ===== 评审迭代 v3 ===== */
+/* 书脊分组 */
+.spine .ngroup{display:flex;flex-direction:column;gap:2px}
+.spine .nglabel{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;color:var(--muted);margin:14px 0 5px}
+.spine .ngroup:first-child .nglabel{margin-top:0}
+.spine .prog{margin:12px 0 0;font-family:var(--sans);font-size:11px;letter-spacing:.06em;color:var(--jade)}
+@media (max-width:980px){
+  .spine .ngroup{flex-direction:row;flex-wrap:wrap;gap:6px;align-items:center;width:100%}
+  .spine .nglabel{flex-basis:100%;margin:8px 0 0}
+  .spine .prog{display:none}
+}
+/* 学习档案按钮 */
+.aboutbtn{font-family:var(--sans);font-size:12px;letter-spacing:.04em;color:var(--jade);background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:2px 9px;margin:0 3px;cursor:pointer;min-height:26px}
+.aboutbtn:hover,.aboutbtn:focus-visible{border-color:var(--jade);outline:none}
+/* 三家注分色 */
+:root{--ji:#2f5f8f;--suo:#2b6b4f;--zheng:#8a5a2b}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--ji:#8db3d6;--suo:#8fc2a6;--zheng:#c79a63} }
+:root[data-theme="dark"]{--ji:#8db3d6;--suo:#8fc2a6;--zheng:#c79a63}
+.src-ji{color:var(--ji)}
+.src-suo{color:var(--suo)}
+.src-zheng{color:var(--zheng)}
+.zitem b[data-src="集解"]{color:var(--ji);border-color:var(--ji)}
+.zitem b[data-src="索隱"]{color:var(--suo);border-color:var(--suo)}
+.zitem b[data-src="正義"]{color:var(--zheng);border-color:var(--zheng)}
+/* 校记角标 */
+.unit .o .colan{display:inline-flex;align-items:center;justify-content:center;min-width:22px;min-height:22px;margin:0 1px;padding:0 3px;font-family:var(--sans);font-size:10.5px;line-height:1;color:var(--seal);background:var(--slip);border:1px solid var(--seal);border-radius:4px;vertical-align:super;cursor:pointer}
+.unit .o .colan[aria-expanded="true"]{background:var(--seal);color:var(--paper)}
+.unit .o .colan:focus-visible{outline:2px solid var(--seal);outline-offset:1px}
+.colbox{grid-column:1/-1;margin:6px 0 0;padding:6px 10px;font-size:12.8px;line-height:1.8;color:var(--ink2);background:var(--slip);border-left:2px solid var(--seal);border-radius:2px}
+.colbox b{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--seal);border:1px solid currentColor;border-radius:3px;padding:0 4px;margin-right:7px}
+.colbox .cq{color:var(--ink);margin-right:6px}
+.study .unit .colan,.study .colbox{display:none}
+#jingdu.mode-story .colbox{display:none}
+/* 串读：差异高亮 + 深读 */
+.pvcols.show-hl .po.mk{background:#f1dfb8;box-shadow:0 0 0 3px #f1dfb8;border-radius:2px}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .pvcols.show-hl .po.mk{background:#43351b;box-shadow:0 0 0 3px #43351b} }
+:root[data-theme="dark"] .pvcols.show-hl .po.mk{background:#43351b;box-shadow:0 0 0 3px #43351b}
+.pvbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px}
+.pvbar .pvbtn{margin-top:0}
+.pvbar .pvbtn[aria-pressed="true"]{background:var(--jade);color:var(--paper);border-color:var(--jade)}
+.pvlegend{font-family:var(--sans);font-size:11px;color:var(--muted)}
+.pvdeep{margin:18px 0 0;border-top:1px solid var(--line);padding-top:12px}
+.pvdeep summary{font-family:var(--sans);font-size:12px;letter-spacing:.06em;color:var(--jade);cursor:pointer;min-height:24px}
+.pvdeep-body{font-size:13.5px;line-height:1.85;color:var(--ink2);overflow-x:auto}
+.pvdeep-body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px}
+.pvdeep-body th,.pvdeep-body td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.pvdeep-body th{background:var(--jade-soft);font-family:var(--sans);font-weight:600;font-size:11.5px}
+.pvdeep-body b{color:var(--ink)}
+.pvdeep-body p{margin:8px 0}
+/* 人物拓扑：关系边语义色 */
+:root{--rel-subord:var(--jade);--rel-ally:#a9702a;--rel-hostile:var(--seal)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--rel-ally:#c89a63} }
+:root[data-theme="dark"]{--rel-ally:#c89a63}
+.pglegend{font-family:var(--sans);font-size:11px;color:var(--muted);margin:2px 0 0;text-align:center}
+.pglegend i{display:inline-block;width:14px;height:2px;margin:0 4px 0 10px;vertical-align:middle;background:currentColor}
+.pglegend .k-subord{color:var(--rel-subord)}
+.pglegend .k-ally{color:var(--rel-ally)}
+.pglegend .k-hostile{color:var(--rel-hostile)}
 </style>
 
 <div class="shell">
   <aside class="spine">
     <p class="mark">史 記</p>
     <nav aria-label="页面导航">
-      <a href="#start">从这里开始</a>
-      <a href="#people">人物</a>
-      <a href="#read">读法</a>
-      <a href="#view">史观</a>
-      <a href="#rules">规律</a>
-      <a href="#craft">用人 · 技法</a>
-      <a href="#chapters">篇章 132</a>
-      <a href="#topics">主题</a>
-      <a href="#timeline">时间轴</a>
-      <a href="#tables">十表</a>
-      <a href="#quick">速查</a>
-      <a href="#terms">术语</a>
-      <a href="#collation">校记</a>
-      <a href="#about">底本</a>
+      <!-- 评审迭代 v3：四组 -->
+      <div class="ngroup"><p class="nglabel">一 · 入门与方法</p>
+        <a href="#start">从这里开始</a>
+        <a href="#read">读法</a>
+        <a href="#view">史观</a>
+      </div>
+      <div class="ngroup"><p class="nglabel">二 · 精读与检索</p>
+        <a href="#chapters">篇章 132</a>
+        <a href="#people">人物</a>
+        <a href="#topics">主题</a>
+        <a href="#timeline">时间轴</a>
+        <a href="#tables">十表</a>
+      </div>
+      <div class="ngroup"><p class="nglabel">三 · 博弈与规律</p>
+        <a href="#rules">规律</a>
+        <a href="#craft">用人 · 技法</a>
+        <a href="#quick">速查</a>
+      </div>
+      <div class="ngroup"><p class="nglabel">四 · 辞书与考据</p>
+        <a href="#terms">术语</a>
+        <a href="#collation">校记</a>
+        <a href="#about">底本</a>
+      </div>
     </nav>
-    <p class="count">本纪 12 · 表 10<br>书 8 · 世家 30<br>列传 70</p>
+    <p class="count">本纪 12 · 表 10<br>书 8 · 世家 30<br>列传 70<br><span style="color:var(--ink2)">130 正篇 + 2 附篇 = 132</span></p>
+    <p class="prog" id="navprog" aria-live="polite">已读 0 / 132</p>
   </aside>
 
   <main>
@@ -779,7 +848,7 @@ footer.page a:hover{border-bottom-color:var(--jade)}
       <p class="eyebrow">从这里开始</p>
       <h2>先选一条线<small>第一次读，别从第一篇硬啃。挑一条 3–5 篇的短线，先把人物和时间接上；读完一条，再散着读。</small></h2>
       <div class="quicklinks">
-        <a href="#people"><b>人物卡 · 55 位</b><span>他是谁、和谁有关系、在哪几篇</span></a>
+        <a href="#people"><b>人物卡 · 60 位</b><span>他是谁、和谁有关系、在哪几篇</span></a>
         <a href="#timeline"><b>时间轴 · 33 个节点</b><span>先定位，再读篇</span></a>
         <a href="#quick"><b>速查 · 决策规则</b><span>When X, do Y</span></a>
       </div>
@@ -803,7 +872,7 @@ footer.page a:hover{border-bottom-color:var(--jade)}
           <input id="whoq" type="search" placeholder="输入：韩信、长平、廷尉…" autocomplete="off" aria-label="查人名地名官职">
           <div class="hits" id="whohits"></div>
           <p class="empty" id="whoempty" hidden>没有找到。换个更短的词试试。</p>
-          <p class="who-more"><a href="#people">看全部 55 位人物卡 →</a></p>
+          <p class="who-more"><a href="#people">看全部 60 位人物卡 →</a></p>
         </div>
       </div>
     </section>
@@ -813,7 +882,7 @@ footer.page a:hover{border-bottom-color:var(--jade)}
       <h2>先认人，再读事<small>点一个人，看他是谁、和谁有关系、在哪几篇出场。人名不是用来背的，是用来认路的。</small></h2>
       <div class="ptool"><input id="pq" type="search" placeholder="搜：项羽、韩信、李广…" autocomplete="off" aria-label="搜人物"></div>
       <div class="pgrid" id="pgrid"></div>
-      <button class="dmore" id="pmore" type="button">显示全部 55 位</button>
+      <button class="dmore" id="pmore" type="button">显示全部 60 位</button>
     </section>
 
     <section id="read">
@@ -991,8 +1060,11 @@ footer.page a:hover{border-bottom-color:var(--jade)}
         <p><b>注释</b>：出版社注释挂到对应句，点句上标展开；导读、译文、摘要为本站整理，AI 生成部分已标注。</p>
         <p><b>校对</b>：精读原文逐字回查底本；底本明显讹字未改动原文，引用时按通行文本校正之处已在导读中说明。</p>
         <p><b>三家注</b>：21,311 条，据四库本转录；集解 98.4%、正义 97.2%、索隐 59.2% 已挂靠（索隐短片段歧义较大，不硬提）；句对齐约 90–96%，与底本及中华书局点校本可能有异文，引用前核对底本。</p>
-        <p><b>引用</b>：司马迁：《史记》，北京：中国文史出版社，2021 年。</p>
-        <p><b>离线单文件</b>：<a href="dist/shiji-standalone.html" download>下载 10.7MB 单文件版</a>（全部内联，可离线；不含分篇页）。</p>
+        <p><b>篇目计数</b>：通行本一百三十篇（本纪 12、表 10、书 8、世家 30、列传 70）。本站「篇章 132」另收《报任安书》（见《汉书·司马迁传》《文选》）与开篇导论，故总数为 132；凡引「百三十篇」，皆指正篇。</p>
+      <p><b>三段读法</b>：通读层以现代排印与白话对译，按自然段切分；研究层的三家注分色标注——集解（<span class="src-ji">裴骃</span>·蓝）、索隐（<span class="src-suo">司马贞</span>·绿）、正义（<span class="src-zheng">张守节</span>·棕），三家注引古本异文处，与「校记」互链。</p>
+      <p><b>学习档案</b>：已读篇目、划线笔记、字体与阅读偏好都存在本机浏览器，换设备或清缓存会丢，可导出 JSON 备份：<button type="button" class="aboutbtn" id="expArch">导出档案</button><button type="button" class="aboutbtn" id="impArch">导入档案</button><input type="file" id="impFile" accept="application/json,.json" hidden></p>
+      <p><b>引用</b>：司马迁：《史记》，北京：中国文史出版社，2021 年。</p>
+        <p><b>离线单文件</b>：当前文件即离线单文件版，全部内联，可离线使用。</p>
       </div>
       <p class="resume" id="localstats" hidden></p>
     </section>
@@ -1515,6 +1587,7 @@ function jdNode(n){
     nav.appendChild(a);
   });
   initNotes(wrap, ctl, n);
+  mountLection(wrap, n);
   wrap.addEventListener("click", e => {
     const tl = e.target.closest("a.term-inline");
     if (tl){
@@ -1628,6 +1701,37 @@ function guide132(){
   return wrap;
 }
 
+function mountLection(wrap, n){
+  const list = LECTIO.filter(c => c.ch === n);
+  if (!list.length) return;
+  const rows = [...wrap.querySelectorAll(".unit")];
+  list.forEach(c => {
+    for (const row of rows){
+      const o = row.querySelector(".o");
+      if (!o || !o.textContent.includes(c.anchor)) continue;
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "colan"; b.textContent = "校";
+      b.title = "校记：" + (c.mark || c.anchor);
+      b.setAttribute("aria-expanded", "false");
+      const box = document.createElement("div");
+      box.className = "colbox"; box.hidden = true;
+      const tag = document.createElement("b"); tag.textContent = "校";
+      const q = document.createElement("span"); q.className = "cq"; q.textContent = c.q;
+      const nt = document.createElement("span"); nt.className = "cn"; nt.textContent = c.note;
+      box.append(tag, q, nt);
+      b.addEventListener("click", e => {
+        e.stopPropagation();
+        const on = b.getAttribute("aria-expanded") !== "true";
+        b.setAttribute("aria-expanded", String(on));
+        box.hidden = !on;
+      });
+      o.appendChild(b);
+      row.appendChild(box);
+      break;
+    }
+  });
+}
+
 function renderJingdu(host, n){
   if (JD[n]){
     host.appendChild(jdNode(n));
@@ -1678,6 +1782,8 @@ $("#preset").addEventListener("click", () => {
 function updateProgress(){
   const n = readSet.size;
   $("#pcount").textContent = `${n} / ${items.length} 篇已读`;
+  const np = document.getElementById("navprog");
+  if (np) np.textContent = `已读 ${n} / ${items.length}`;
   $("#pbar").style.width = (n / items.length * 100).toFixed(1) + "%";
 }
 updateProgress();
@@ -1794,7 +1900,7 @@ QUOTES.forEach(([q, id]) => {
 });
 
 /* ---------- 术语 ---------- */
-const TERMS = [["安刘", "诛诸吕、迎代王，使刘氏宗庙复安（ch010、ch040）"], ["八书", "礼、乐、律、历、天官、封禅、河渠、平准，记制度而非记人（ch114–121）"], ["本纪", "以帝王为中心编年，全书之纲（ch002–013）"], ["曹随", "曹参代萧何为相，“举事无所变更，一遵萧何约束”（ch037）"], ["禅让", "以“天下归之”为检验的传位方式，非单纯让贤（ch002）"], ["长平", "秦赵决战，赵括代廉颇，四十余万降卒被坑（ch056、ch064）"], ["陈涉首难", "大泽乡起义，为亡秦开端；“王侯将相宁有种乎”（ch031）"], ["成一家之言", "司马迁的著述目标，承认立场与体系（ch113、ch122）"], ["春秋笔法", "以字句与体例寓褒贬；七十子“口受其传指”（ch124）"], ["大同", "决策五源（心、卿士、庶民、龟、筮）皆从（ch021）"], ["刀笔吏", "以文法断案的基层官吏，汲黯斥其不可为公卿（ch103）"], ["倒书", "《将相表》把丞相罢废死免倒写于他栏，构成“无字之序”（ch132）"], ["地缘论", "“作事者必于东南，收功实者常于西北”（ch125）"], ["帝号", "秦始皇“去泰著皇，采帝位号”，废谥法（ch007）"], ["鼎", "王权符号；“在德不在鼎”（ch023）"], ["东道", "卫青令李广出东道，失期，李广自刎（ch092）"], ["独尊儒术", "窦太后崩后田蚡绌黄老、延儒者；公孙弘以白衣为三公（ch104）"], ["发愤著书", "困厄促成著述，《诗》三百篇“大抵圣贤发愤之所为作”（ch122）"], ["法后王", "秦制虽暴而“成功大”，不必以古非今（ch125）"], ["焚书", "李斯请禁私学，非博士官所职者烧之（ch007、ch070）"], ["封禅", "泰山祭天、梁父祭地，宣示受命（ch119）"], ["封爵之誓", "“使河如带，泰山若厉，国以永宁，爰及苗裔”（ch128）"], ["负荆", "廉颇肉袒负荆谢蔺相如；“先国家之急而后私仇”（ch064）"], ["革命", "以“德衰—诸侯畔—吊民伐罪”解释改朝换代（ch003、ch004）"], ["功人功狗", "刘邦论萧何为“发踪指示”之人，战将为“功狗”（ch036）"], ["骨肉相残", "卫、晋、齐等世家的继承内乱模式（ch020、ch022）"], ["合纵", "六国从亲以抗秦，苏秦为从约长（ch052）"], ["河渠", "郑国渠、都江堰、瓠子堵口等水利工程（ch120）"], ["鸿门", "项羽放走刘邦；范增举玦，项庄舞剑（ch008）"], ["胡服骑射", "赵武灵王“便国不必古”的军事改革（ch026）"], ["黄老", "清静无为的治术，文景、汲黯、曹参所行（ch011、ch037、ch103）"], ["稽疑", "《洪范》决策程序，五占从其多（ch021、ch111）"], ["继承", "嫡长、兄终弟及、推恩；破例即生乱（ch005、ch022、ch124）"], ["既得利益者", "反对内属/改革的权臣，以“忠”自饰（ch096）"], ["桀宋", "宋君偃“射天”，诸侯共伐（ch021）"], ["九鼎", "王权之器，楚庄王问其轻重（ch023）"], ["举荐", "荐师者相、荐臣者臣（李克、翟璜，ch027）"], ["君令有所不受", "孙武、穰苴、信陵君的军中原则（ch047、ch048、ch060）"], ["酷吏", "以严刑峻法为治的官吏，武帝朝十余人（ch105）"], ["李广难封", "战功与军功核算法不匹配（ch092）"], ["连横", "分化六国、逐个事秦，张仪所行（ch053）"], ["廉吏", "公仪休“以嗜鱼故不受鱼”（ch102）"], ["列传", "以人物为单位，七十篇（ch044–ch113）"], ["六家要旨", "阴阳、儒、墨、名、法、道德，各有所长（ch113）"], ["吕氏春秋", "吕不韦门客所编，“一字千金”（ch068）"], ["马上治之", "陆贾“居马上得之，宁可以马上治之乎”（ch080）"], ["鸣镝", "冒顿以响箭训练绝对服从（ch093）"], ["末大于本", "支系强于本宗，必乱（ch022）"], ["南越", "赵佗建国、陆贾两使、吕嘉之乱（ch096）"], ["宁有种乎", "“王侯将相宁有种乎”，陈涉动员口号（ch031）"], ["平准", "官府贱买贵卖以平物价、增收入（ch121）"], ["七国之乱", "吴楚等七国以“请诛晁错”为名反（ch012、ch089）"], ["前倨后恭", "苏秦嫂“见季子位高金多也”（ch052）"], ["钳徒", "受过钳刑的相者，预言卫青“官至封侯”（ch094）"], ["窃钩者诛", "“窃钩者诛，窃国者侯，侯之门仁义存”（ch107）"], ["侵官", "田蚡“荐人或起家至二千石”，权移主上（ch090）"], ["三表", "十表中的三代、十二诸侯、六国三段（ch123–125）"], ["三代之正", "夏正建寅、殷正建丑、周正建子（ch117）"], ["商君", "变法者，终被车裂；“天资刻薄人”（ch051）"], ["上计", "郡国上报户口、钱谷的年度簿籍，张苍主之（ch079）"], ["社稷臣", "与国同存亡之臣，非仅功臣（ch084）"], ["世家", "记诸侯与勋贵世系，三十篇（ch014–043）"], ["市籍", "商人户籍，汉初限制其仕宦（ch121）"], ["受命", "“五年之间，号令三嬗”的合法性更替（ch126）"], ["书同文", "秦统一文字、度量衡（ch007）"], ["说难", "韩非论说服之难：“在知所说之心”（ch046）"], ["四维", "礼义廉耻，“四维不张，国乃灭亡”（ch045）"], ["推恩", "令诸侯分邑子弟，不削而自弱（ch095、ch131）"], ["王蠋", "布衣“忠臣不事二君”，自绝而死（ch065）"], ["伍被之谏", "以具体将领评价劝阻淮南王谋反（ch101）"], ["息壤", "甘茂与秦武王盟誓之处；“息壤在彼”（ch054）"], ["徙豪", "刘敬“强本弱末”，迁六国后裔与豪杰入关中（ch082）"], ["滑稽", "“谈言微中，亦可以解纷”（ch109）"], ["先国家之急", "蔺相如避廉颇的理由（ch064）"], ["萧规曹随", "见“曹随”"], ["循吏", "奉职循理之吏，孙叔敖、子产等（ch102）"], ["盐铁", "官营专卖，武帝财政的支柱（ch121）"], ["一沐三捉发", "周公待士之勤（ch016）"], ["以耳食", "不察终始而笑秦，等于“用耳朵吃饭”（ch125）"], ["以少败众", "英布军锋之能（ch074）"], ["因祸为福", "管仲“善因祸而为福，转败而为功”（ch045）"], ["游侠", "“其言必信，其行必果，已诺必诚”（ch107）"], ["约法三章", "刘邦入关，“杀人者死，伤人及盗抵罪”（ch009）"], ["月表", "秦楚之际因变化太速，以月纪事（ch126）"], ["臧否", "“太史公曰”中的褒贬判语（各篇末）"], ["曾参杀人", "三人言而母投杼，喻谗言可畏（ch054）"], ["斩蛇", "刘邦斩白蛇，赤帝子之说（ch009）"], ["长者", "汉初对宽厚有德者的称许（ch085、ch087）"], ["真将军", "文帝赞周亚夫细柳营（ch040）"], ["指鹿为马", "赵高试探群臣（ch007）"], ["锥处囊中", "毛遂自荐；“颖脱而出”（ch059）"], ["纵横", "合纵连横之士，多出三晋（ch052、ch053）"], ["左袒", "周勃入北军，“为刘氏左袒”（ch010）"]];
+const TERMS = [["互见法", "同一事件分见数篇，详略褒贬各异；鸿门宴见 ch008 与 ch009 对照"], ["均输", "官府统一转运贡品，往价高之地出售，与平准相表里（ch121）"], ["二十等爵", "商鞅变法确立、汉承秦制的军功爵，一级公士至二十级彻侯（ch051）"], ["旁行斜上", "十表版式：横列国名、纵排年代，以二维矩阵容纳多线并行的政局（ch124–132）"], ["太史公曰", "篇末论赞，司马迁现身下判语、交代史料来源之处（各篇末）"], ["安刘", "诛诸吕、迎代王，使刘氏宗庙复安（ch010、ch040）"], ["八书", "礼、乐、律、历、天官、封禅、河渠、平准，记制度而非记人（ch114–121）"], ["本纪", "以帝王为中心编年，全书之纲（ch002–013）"], ["曹随", "曹参代萧何为相，“举事无所变更，一遵萧何约束”（ch037）"], ["禅让", "以“天下归之”为检验的传位方式，非单纯让贤（ch002）"], ["长平", "秦赵决战，赵括代廉颇，四十余万降卒被坑（ch056、ch064）"], ["陈涉首难", "大泽乡起义，为亡秦开端；“王侯将相宁有种乎”（ch031）"], ["成一家之言", "司马迁的著述目标，承认立场与体系（ch113、ch122）"], ["春秋笔法", "以字句与体例寓褒贬；七十子“口受其传指”（ch124）"], ["大同", "决策五源（心、卿士、庶民、龟、筮）皆从（ch021）"], ["刀笔吏", "以文法断案的基层官吏，汲黯斥其不可为公卿（ch103）"], ["倒书", "《将相表》把丞相罢废死免倒写于他栏，构成“无字之序”（ch132）"], ["地缘论", "“作事者必于东南，收功实者常于西北”（ch125）"], ["帝号", "秦始皇“去泰著皇，采帝位号”，废谥法（ch007）"], ["鼎", "王权符号；“在德不在鼎”（ch023）"], ["东道", "卫青令李广出东道，失期，李广自刎（ch092）"], ["独尊儒术", "窦太后崩后田蚡绌黄老、延儒者；公孙弘以白衣为三公（ch104）"], ["发愤著书", "困厄促成著述，《诗》三百篇“大抵圣贤发愤之所为作”（ch122）"], ["法后王", "秦制虽暴而“成功大”，不必以古非今（ch125）"], ["焚书", "李斯请禁私学，非博士官所职者烧之（ch007、ch070）"], ["封禅", "泰山祭天、梁父祭地，宣示受命（ch119）"], ["封爵之誓", "“使河如带，泰山若厉，国以永宁，爰及苗裔”（ch128）"], ["负荆", "廉颇肉袒负荆谢蔺相如；“先国家之急而后私仇”（ch064）"], ["革命", "以“德衰—诸侯畔—吊民伐罪”解释改朝换代（ch003、ch004）"], ["功人功狗", "刘邦论萧何为“发踪指示”之人，战将为“功狗”（ch036）"], ["骨肉相残", "卫、晋、齐等世家的继承内乱模式（ch020、ch022）"], ["合纵", "六国从亲以抗秦，苏秦为从约长（ch052）"], ["河渠", "郑国渠、都江堰、瓠子堵口等水利工程（ch120）"], ["鸿门", "项羽放走刘邦；范增举玦，项庄舞剑（ch008）"], ["胡服骑射", "赵武灵王“便国不必古”的军事改革（ch026）"], ["黄老", "清静无为的治术，文景、汲黯、曹参所行（ch011、ch037、ch103）"], ["稽疑", "《洪范》决策程序，五占从其多（ch021、ch111）"], ["继承", "嫡长、兄终弟及、推恩；破例即生乱（ch005、ch022、ch124）"], ["既得利益者", "反对内属/改革的权臣，以“忠”自饰（ch096）"], ["桀宋", "宋君偃“射天”，诸侯共伐（ch021）"], ["九鼎", "王权之器，楚庄王问其轻重（ch023）"], ["举荐", "荐师者相、荐臣者臣（李克、翟璜，ch027）"], ["君令有所不受", "孙武、穰苴、信陵君的军中原则（ch047、ch048、ch060）"], ["酷吏", "以严刑峻法为治的官吏，武帝朝十余人（ch105）"], ["李广难封", "战功与军功核算法不匹配（ch092）"], ["连横", "分化六国、逐个事秦，张仪所行（ch053）"], ["廉吏", "公仪休“以嗜鱼故不受鱼”（ch102）"], ["列传", "以人物为单位，七十篇（ch044–ch113）"], ["六家要旨", "阴阳、儒、墨、名、法、道德，各有所长（ch113）"], ["吕氏春秋", "吕不韦门客所编，“一字千金”（ch068）"], ["马上治之", "陆贾“居马上得之，宁可以马上治之乎”（ch080）"], ["鸣镝", "冒顿以响箭训练绝对服从（ch093）"], ["末大于本", "支系强于本宗，必乱（ch022）"], ["南越", "赵佗建国、陆贾两使、吕嘉之乱（ch096）"], ["宁有种乎", "“王侯将相宁有种乎”，陈涉动员口号（ch031）"], ["平准", "官府贱买贵卖以平物价、增收入（ch121）"], ["七国之乱", "吴楚等七国以“请诛晁错”为名反（ch012、ch089）"], ["前倨后恭", "苏秦嫂“见季子位高金多也”（ch052）"], ["钳徒", "受过钳刑的相者，预言卫青“官至封侯”（ch094）"], ["窃钩者诛", "“窃钩者诛，窃国者侯，侯之门仁义存”（ch107）"], ["侵官", "田蚡“荐人或起家至二千石”，权移主上（ch090）"], ["三表", "十表中的三代、十二诸侯、六国三段（ch123–125）"], ["三代之正", "夏正建寅、殷正建丑、周正建子（ch117）"], ["商君", "变法者，终被车裂；“天资刻薄人”（ch051）"], ["上计", "郡国上报户口、钱谷的年度簿籍，张苍主之（ch079）"], ["社稷臣", "与国同存亡之臣，非仅功臣（ch084）"], ["世家", "记诸侯与勋贵世系，三十篇（ch014–043）"], ["市籍", "商人户籍，汉初限制其仕宦（ch121）"], ["受命", "“五年之间，号令三嬗”的合法性更替（ch126）"], ["书同文", "秦统一文字、度量衡（ch007）"], ["说难", "韩非论说服之难：“在知所说之心”（ch046）"], ["四维", "礼义廉耻，“四维不张，国乃灭亡”（ch045）"], ["推恩", "令诸侯分邑子弟，不削而自弱（ch095、ch131）"], ["王蠋", "布衣“忠臣不事二君”，自绝而死（ch065）"], ["伍被之谏", "以具体将领评价劝阻淮南王谋反（ch101）"], ["息壤", "甘茂与秦武王盟誓之处；“息壤在彼”（ch054）"], ["徙豪", "刘敬“强本弱末”，迁六国后裔与豪杰入关中（ch082）"], ["滑稽", "“谈言微中，亦可以解纷”（ch109）"], ["先国家之急", "蔺相如避廉颇的理由（ch064）"], ["萧规曹随", "见“曹随”"], ["循吏", "奉职循理之吏，孙叔敖、子产等（ch102）"], ["盐铁", "官营专卖，武帝财政的支柱（ch121）"], ["一沐三捉发", "周公待士之勤（ch016）"], ["以耳食", "不察终始而笑秦，等于“用耳朵吃饭”（ch125）"], ["以少败众", "英布军锋之能（ch074）"], ["因祸为福", "管仲“善因祸而为福，转败而为功”（ch045）"], ["游侠", "“其言必信，其行必果，已诺必诚”（ch107）"], ["约法三章", "刘邦入关，“杀人者死，伤人及盗抵罪”（ch009）"], ["月表", "秦楚之际因变化太速，以月纪事（ch126）"], ["臧否", "“太史公曰”中的褒贬判语（各篇末）"], ["曾参杀人", "三人言而母投杼，喻谗言可畏（ch054）"], ["斩蛇", "刘邦斩白蛇，赤帝子之说（ch009）"], ["长者", "汉初对宽厚有德者的称许（ch085、ch087）"], ["真将军", "文帝赞周亚夫细柳营（ch040）"], ["指鹿为马", "赵高试探群臣（ch007）"], ["锥处囊中", "毛遂自荐；“颖脱而出”（ch059）"], ["纵横", "合纵连横之士，多出三晋（ch052、ch053）"], ["左袒", "周勃入北军，“为刘氏左袒”（ch010）"]];
 const termsEl = $("#terms");
 function termDesc(d){
   const frag = document.createDocumentFragment();
@@ -2093,6 +2199,11 @@ function addPreface(inner, it){
 }
 
 const PEOPLE = [
+{n:121,name:"桑弘羊",alias:"洛阳贾人之子；大农令",id:"武帝朝财政操盘手，盐铁官营、均输平准皆出其手；昭帝时以谋反诛。",chs:[121,105,119],rel:[["汉武帝","君臣"],["张汤","财政同僚"],["卜式","朝堂辩难"],["司马迁","同时代观察"]],ev:["盐铁官营","均输平准","白鹿皮币"]},
+{n:93,name:"冒顿单于",alias:"挛鞮氏；匈奴单于",id:"鸣镝弑父自立，东破东胡、西击月氏，围高祖于白登，奠定汉初和亲格局。",chs:[93,9,10,82],rel:[["头曼单于","父子/弑代"],["刘邦","对手"],["吕后","书信博弈"],["韩王信","招降"]],ev:["白登之围","和亲"]},
+{n:95,name:"主父偃",alias:"齐国游士；附见平津侯列传",id:"献推恩令，兵不血刃瓦解诸侯；一句「日暮途远，故倒行而逆施」道尽游士之悲。",chs:[95,127],rel:[["汉武帝","破格提拔"],["晁错","削藩对照"],["公孙弘","倾轧"],["齐王刘次昌","逼死"]],ev:["推恩令","族诛"]},
+{n:105,name:"张汤",alias:"杜县人；御史大夫",id:"舞文巧诋、揣摩上意，以峻法佐武帝集权；死后家产不过五百金，酷吏的复杂标本。",chs:[105,103,121],rel:[["汉武帝","倚重/弃子"],["汲黯","朝堂死敌"],["桑弘羊","财政协同"],["李蔡","丞相"]],ev:["腹诽之罪","算缗告缗"]},
+{n:100,name:"卓文君",alias:"临邛卓氏女",id:"临邛富商卓王孙之女，夜奔司马相如，当垆卖酒；汉代冶铁豪富与礼法之外的生命力。",chs:[100,112],rel:[["司马相如","私奔/夫妇"],["卓王孙","父女"],["王吉","设谋"]],ev:["当垆卖酒","白头吟"]},
 {n:8,name:"项羽",alias:"名籍，字羽；西楚霸王",id:"楚国名将项燕之孙，反秦联军首领。",chs:[7,8,9,31,75],rel:[["项梁","叔父"],["刘邦","对手"],["范增","谋主"],["虞姬","宠姬"]],ev:["巨鹿之战","鸿门宴","垓下之战"]},
 {n:9,name:"刘邦",alias:"字季；汉高祖",id:"沛县人，汉朝开国皇帝。",chs:[8,9,10,36,38,75,78],rel:[["吕后","妻"],["项羽","对手"],["韩信","将"],["萧何","相"],["张良","谋臣"]],ev:["鸿门宴","楚汉相争","垓下之战"]},
 {n:75,name:"韩信",alias:"淮阴侯",id:"淮阴人，刘邦大将，封淮阴侯，后以谋反被诛。",chs:[8,9,36,38,75,92],rel:[["萧何","举荐者"],["刘邦","君"],["吕后","杀他者"],["张耳","战友"]],ev:["楚汉相争","垓下之战"]},
@@ -2190,13 +2301,34 @@ const TIMELINE = [
 const PARALLEL = [
 {t:"鸿门宴",note:"同一场饭局：项羽本纪写全过程（项庄舞剑、樊哙闯帐、刘邦如厕），高祖本纪只用几句带过。详略不同，就是互见。",
  a:{n:8,from:"沛公旦日从百余骑来见项王",to:"沛公起如厕，因招樊哙出"},
- b:{n:9,from:"会项伯欲活张良",to:"归，立诛曹无伤"}},
+ b:{n:9,from:"会项伯欲活张良",to:"归，立诛曹无伤"},
+ mark:{a:["玉玦","项庄","项伯亦拔剑","侧其盾以撞","彘肩"],b:[]},
+ deep:`<table>
+<thead><tr><th>同题四篇</th><th>写了什么</th><th>剪裁之意</th></tr></thead>
+<tbody>
+<tr><td>《项羽本纪》ch008</td><td>近千四百字，全景：告密、夜访、座次、举玦、舞剑、闯帐、如厕</td><td>把项羽的妇人之仁与政治天真放在聚光灯下</td></tr>
+<tr><td>《高祖本纪》ch009</td><td>不足二百字，只记「谢羽」与「归，立诛曹无伤」</td><td>为高祖讳饰狼狈，仍留下诛曹无伤这一笔</td></tr>
+<tr><td>《留侯世家》ch038</td><td>补鸿门之前的危机：樊哙劝不动，张良以忠言逆耳说刘邦还军霸上</td><td>真正的化解，发生在饭局之前</td></tr>
+<tr><td>《樊郦滕灌列传》ch078</td><td>拥盾撞卫、生彘肩、拔剑切啖，及赐爵封赏</td><td>用屠狗者的粗豪，反衬其词令之精</td></tr>
+</tbody></table>
+<p><b>座次即权力</b>：本篇写「项王、项伯东乡坐，亚父南乡坐，沛公北乡坐，张良西乡侍」。秦汉室内以东乡（坐西朝东）为尊，南乡次之；刘邦北乡就臣位，张良西乡就侍位。项羽据尊位，杀心已消了大半。</p>
+<p><b>樊哙的词令</b>：先立「秦有虎狼之心，天下皆叛」的前提，再把刘邦定位为替项羽打前站的功臣，落到「劳苦而功高如此，未有封侯之赏，而听细说，欲诛有功之人，此亡秦之续耳」。一句威胁没有，项羽只能答「坐」。</p>`},
 {t:"长平之战",note:"白起王翦列传写战场与坑卒；廉颇蔺相如列传写换将的决策、赵括母亲的劝阻。一个写结果，一个写为什么换人。",
  a:{n:56,from:"廉颇坚壁以待秦",to:"卒四十万人降武安君"},
  b:{n:64,from:"七年，秦与赵兵相距长平",to:"赵前后所亡凡四十五万"}},
 {t:"沙丘之变",note:"秦始皇本纪写事件经过；李斯列传从赵高找李斯开始，写他怎样一步步把李斯拖下水。同一件事，一个记结果，一个记人心。",
  a:{n:7,from:"上病益甚，乃为玺书赐公子扶苏",to:"语具在《李斯传》中"},
- b:{n:70,from:"高乃谓丞相斯曰",to:"于是斯乃听高"}},
+ b:{n:70,from:"高乃谓丞相斯曰",to:"于是斯乃听高"},
+ mark:{a:["秘之","不发丧"],b:["通侯之印","垂泪太息"]},
+ deep:`<table>
+<thead><tr><th>三篇分工</th><th>独家细节</th><th>揭示的病灶</th></tr></thead>
+<tbody>
+<tr><td>《秦始皇本纪》ch007</td><td>崩于沙丘平台，李斯「恐诸公子及天下有变，乃秘之，不发丧」；会暑，辒车臭，诏从官载一石鲍鱼以乱其臭</td><td>交接系于一人之身；一车鲍鱼是帝国表里之喻</td></tr>
+<tr><td>《李斯列传》ch070</td><td>赵高五轮游说，以「长子即位必用蒙恬为相，君侯终不怀通侯之印归于乡里」点穴，李斯仰天而叹，垂泪太息</td><td>仓鼠之叹的底色：惧贫贱，则底线可卖</td></tr>
+<tr><td>《蒙恬列传》ch071</td><td>蒙恬劝扶苏「请复请」，扶苏曰「父而赐子死，尚安复请」；蒙恬疑其诈，终吞药自尽</td><td>三十万边兵在手，对一纸伪诏无处置喙</td></tr>
+</tbody></table>
+<p><b>制度悖论</b>：玉玺在赵高手里，诏书在胡亥身边草拟，行政签署权在丞相李斯手里。三者私合，伪诏便通畅无阻——不是某个人愚蠢，而是废分封、集权于一的制度在顶点上的必然脆弱。</p>
+<p><b>与「规律」呼应</b>：「继承规则一破，乱以世代计」。始皇未立太子，一死便无制度可依，沙丘只是把这句话演了一遍。</p>`},
 {t:"七国之乱",note:"孝景本纪只用几句记结果；吴王濞列传保存了起兵檄文，能看出叛军怎样动员。",
  a:{n:12,from:"吴王濞、楚王戊",to:"封大将军窦婴为魏其侯"},
  b:{n:89,from:"孝景帝三年正月甲子",to:"愿王勉之"}}
@@ -2352,11 +2484,14 @@ function sliceUnits(n, from, to){
   return units.slice(a, b + 1);
 }
 function openParallel(p){
+  // 未读过的篇先取数据，否则「对照原文」会落空
+  return (async () => {
+  await Promise.all([p.a.n, p.b.n].filter(n => !JD[n] && JDN.has(n)).map(n => loadJD(n)));
   const box = document.createElement("div"); box.className = "pv";
   const h = document.createElement("h2"); h.id = "mtitle"; h.textContent = p.t;
   const note = document.createElement("p"); note.className = "pvnote"; note.textContent = p.note;
   const cols = document.createElement("div"); cols.className = "pvcols";
-  const mkcol = (spec) => {
+  const mkcol = (spec, side) => {
     const col = document.createElement("div"); col.className = "pvcol";
     const it = items.find(x => x.n === spec.n);
     const h4 = document.createElement("h4");
@@ -2369,16 +2504,43 @@ function openParallel(p){
       col.appendChild(miss);
     } else {
       units.forEach(u => {
-        const o = document.createElement("p"); o.className = "po"; o.textContent = u[0];
+        const o = document.createElement("p"); o.className = "po";
+        if (p.mark && (p.mark[side] || []).some(kw => u[0].includes(kw))) o.classList.add("mk");
+        o.textContent = u[0];
         const t = document.createElement("p"); t.className = "pt"; t.textContent = u[1];
         col.append(o, t);
       });
     }
     return col;
   };
-  cols.append(mkcol(p.a), mkcol(p.b));
-  box.append(h, note, cols);
+  cols.append(mkcol(p.a, "a"), mkcol(p.b, "b"));
+  box.append(h, note);
+  if (p.mark){
+    const bar = document.createElement("div"); bar.className = "pvbar";
+    const tb = document.createElement("button");
+    tb.type = "button"; tb.className = "pvbtn"; tb.textContent = "互见差异高亮";
+    tb.setAttribute("aria-pressed", "false");
+    tb.addEventListener("click", () => {
+      const on = tb.getAttribute("aria-pressed") !== "true";
+      tb.setAttribute("aria-pressed", String(on));
+      cols.classList.toggle("show-hl", on);
+    });
+    const lg = document.createElement("span"); lg.className = "pvlegend";
+    lg.textContent = "琥珀色＝本篇独有的关键细节；留白处即另一篇的省略";
+    bar.append(tb, lg); box.appendChild(bar);
+  }
+  box.appendChild(cols);
+  if (p.deep){
+    const de = document.createElement("details"); de.className = "pvdeep";
+    const su = document.createElement("summary"); su.textContent = "深读：这几篇的剪裁与人情";
+    const body = document.createElement("div"); body.className = "pvdeep-body";
+    body.innerHTML = p.deep;
+    linkifyChRefs(body);
+    de.append(su, body); box.appendChild(de);
+  }
   openModal(box);
+  })();
+
 }
 function setMode(m, save){
   if (save !== false) store.set("shiji.mode", m);
@@ -2444,6 +2606,11 @@ function buildBefore(it){
 
 
 /* ---------- P2 功能 ---------- */
+function relKind(t){
+  if (/杀|诛|敌|对手|陷害|倾轧|反目|弑|诈|逼死|弃子/.test(t)) return "hostile";
+  if (/举荐|推荐|盟友|故交|同门|连襟|战友|婚姻|谋主|同谋|托孤|私奔/.test(t)) return "ally";
+  return "subord";
+}
 function personGraph(p){
   const rel = (p.rel || []).slice(0, 8);
   if (!rel.length) return null;
@@ -2459,7 +2626,7 @@ function personGraph(p){
     const line = document.createElementNS(NS, "line");
     line.setAttribute("x1", cx); line.setAttribute("y1", cy);
     line.setAttribute("x2", x); line.setAttribute("y2", y);
-    line.style.stroke = "var(--line)"; line.style.strokeWidth = "1.2";
+    line.style.stroke = "var(--rel-" + relKind(type) + ")"; line.style.strokeWidth = "1.5";
     svg.appendChild(line);
     const lab = document.createElementNS(NS, "text");
     lab.setAttribute("x", (cx + x) / 2); lab.setAttribute("y", (cy + y) / 2 - 3);
@@ -2490,7 +2657,10 @@ function personGraph(p){
   ct.style.fontSize = "15px"; ct.style.fontWeight = "600";
   ct.style.fill = "var(--paper)"; ct.textContent = p.name;
   svg.appendChild(ct);
-  const box = document.createElement("div"); box.className = "pgraph"; box.appendChild(svg);
+  const lg = document.createElement("p"); lg.className = "pglegend";
+  lg.innerHTML = '<i class="k-subord"></i>君臣从属<i class="k-ally"></i>盟友举荐<i class="k-hostile"></i>敌对诛杀';
+  const box = document.createElement("div"); box.className = "pgraph";
+  box.append(svg, lg);
   return box;
 }
 function speakChapter(it, btn){
@@ -3057,6 +3227,18 @@ const VARIANTS = [
   { ch:6,  q:"［適］嗣：正妻所生的长子……適，通「嫡」", mark:"適", note:"「適」是「嫡」的本字。词条保留原字形，不作简化。" }
 ];
 
+/* 评审迭代 v3：音义 · 训诂 · 互见（anchor 为阅读器正文中的原句片段） */
+const LECTIO = [
+  { ch:7, q:"［叩］关而攻秦", mark:"叩", anchor:"叩关而攻秦", note:"贾谊《过秦论》原文作「仰关而攻秦」：秦据崤函之险，六国自下仰攻。通行本《史记》多作「叩关」，《文选》所载及北宋景祐本作「仰关」，二说并存，读时按地形取舍。" },
+  { ch:8, q:"闻大王有意［督过］之", mark:"督过", anchor:"有意督过之", note:"《索隐》：督，察也；过，责也。谓深察其过而责备之。俗本或误作「督责之」，当依金陵书局本及中华书局点校本作「督过」。" },
+  { ch:9, q:"高祖为人，隆［准］而龙颜", mark:"准", anchor:"隆准而龙颜", note:"《集解》引服虔曰「准音拙」，文颖曰「准，鼻也」。汉人称鼻为「准」，不可按今义读作「标准」之准；「隆准」即高鼻梁。" },
+  { ch:31, q:"卜者知其［指］意", mark:"指", anchor:"卜者知其指意", note:"汉世「指」「旨」通假，保留「指意」更合西汉文本原貌；坊间简化本径改作「旨意」，失其字形。" },
+  { ch:38, q:"良尝闲从容步游下邳［圯］上", mark:"圯", anchor:"步游下邳圯上", note:"「圯」音 yí，东楚谓桥为圯，字从土从巳。俗本常与「圮」（音 pǐ，毁塌，从土从己）相混，繁简转换时尤须锁定。" },
+  { ch:75, q:"吾悔不用蒯通之计，乃为儿女子所诈", mark:"蒯通之计", anchor:"吾悔不用蒯通之计", note:"本篇详载蒯通以「三分天下、鼎足而居」说韩信；《高祖本纪》只书「十一年春，淮阴侯韩信谋反，夷三族」。一详一略，正是互见笔法。" },
+  { ch:70, q:"夫斯乃上蔡布衣，闾巷之［黔首］", mark:"黔首", anchor:"闾巷之黔首", note:"始皇二十六年「更名民曰黔首」；李斯被捕后追述生平而用秦统一后的法定称谓，非时代错置。" },
+  { ch:113, q:"［罔］罗天下放失旧闻", mark:"罔", anchor:"放失旧闻", note:"「罔」通「网」，《报任安书》即作「网罗」；「失」通「佚」，散失之义。简注中直标「失，通佚」，不可按失败义读。" }
+];
+
 function renderCollation(){
   const host = document.getElementById("colrows");
   if (!host || host.dataset.built) return;
@@ -3104,6 +3286,7 @@ function renderCollation(){
 
   draw(COLLATION, "一 · 底本疑似讹字", "未改动，正文照录，此处只标出可疑字与按语。改动与否由底本决定，不由编者代改。");
   draw(VARIANTS, "二 · 异体与通假", "不是错，是写法不同。注文与词条保留古字，正文用通行字形。");
+  draw(LECTIO, "三 · 音义、训诂与互见", "不是字误，是读法：音义、通假、时代称谓，以及同一件事在别篇怎么写。阅读器里这些句子带「校」角标，点开即见。");
 }
 
 /* ---------- 六、人物互见：谁这样记他 ---------- */
@@ -3166,6 +3349,53 @@ function afterOpen(){
 }
 
 /* ---------- 启动 ---------- */
+/* ---------- 学习档案 ---------- */
+const ARCH_PREFIX = "shiji.";
+function collectArchive(){
+  const keys = {};
+  try {
+    for (let i = 0; i < localStorage.length; i++){
+      const k = localStorage.key(i);
+      if (k && k.indexOf(ARCH_PREFIX) === 0) keys[k] = localStorage.getItem(k);
+    }
+  } catch(e){}
+  return { app: "shiji-overview", v: 1, at: new Date().toISOString(), keys: keys };
+}
+(function wireArchive(){
+  const ex = document.getElementById("expArch");
+  const im = document.getElementById("impArch");
+  const fi = document.getElementById("impFile");
+  if (ex) ex.addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(collectArchive(), null, 1)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    const d = new Date();
+    a.download = "shiji-archive-" + d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0") + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  });
+  if (im && fi){
+    im.addEventListener("click", () => fi.click());
+    fi.addEventListener("change", () => {
+      const f = fi.files && fi.files[0];
+      if (!f) return;
+      if (f.size > 4 * 1024 * 1024){ alert("文件太大，不像是学习档案。"); return; }
+      const fr = new FileReader();
+      fr.onload = () => {
+        let o = null;
+        try { o = JSON.parse(String(fr.result)); } catch(e){}
+        if (!o || o.app !== "shiji-overview" || !o.keys || typeof o.keys !== "object"){ alert("不是本站导出的学习档案。"); return; }
+        const ks = Object.keys(o.keys).filter(k => k.indexOf(ARCH_PREFIX) === 0 && typeof o.keys[k] === "string");
+        if (!ks.length){ alert("档案里没有可导入的记录。"); return; }
+        ks.forEach(k => { try { localStorage.setItem(k, o.keys[k]); } catch(e){} });
+        alert("已导入 " + ks.length + " 项记录，页面将刷新。");
+        location.reload();
+      };
+      fr.readAsText(f);
+    });
+  }
+})();
+
 mountHant();
 renderTables();
 renderCollation();
@@ -3359,6 +3589,7 @@ function paintZhu(wrap, n){
       const p = document.createElement("p");
       p.className = "zitem";
       const b = document.createElement("b");
+      b.dataset.src = src;
       b.textContent = src;
       const s = document.createElement("span");
       s.textContent = txt;
